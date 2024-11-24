@@ -1,6 +1,6 @@
 function Content({children}) {
   return (
-    <div>
+    <div className="p-5">
       {children}
     </div>
   );

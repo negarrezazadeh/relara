@@ -7,15 +7,11 @@ function AppLayout() {
   return (
     <main>
       <Header />
-      <div className="grid grid-cols-12">
-        <div className="lg:col-span-3">
-          <SideBar />
-        </div>
-        <div className="col-span-12 lg:col-span-9">
-          <Content>
-            <Outlet />
-          </Content>
-        </div>
+      <SideBar />
+      <div className="h-screen bg-dark pt-[77px] lg:ps-60">
+        <Content>
+          <Outlet />
+        </Content>
       </div>
     </main>
   );
