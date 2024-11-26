@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { NavLink } from "react-router-dom";
 
 function SidebarAccordion({ icon, title, links }) {
   const sidebarIcon = React.cloneElement(icon, {
@@ -22,9 +23,9 @@ function SidebarAccordion({ icon, title, links }) {
           </AccordionTrigger>
           {links.map((link) => (
             <AccordionContent key={link.label}>
-              <a href={link.href} className="text-gray-200">
+              <NavLink to={link.href} className="text-gray-200">
                 {link.label}
-              </a>
+              </NavLink>
             </AccordionContent>
           ))}
         </AccordionItem>

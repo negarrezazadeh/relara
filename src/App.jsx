@@ -1,9 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AppLayout from "./layouts/AppLayout";
 import Dashboard from "./pages/Dashboard";
-import User from "./pages/User";
+import Users from "./pages/users/Users";
 import Login from "./pages/Login";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ProtectedRoutes from "./layouts/ProtectedRoutes";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,13 +16,19 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_relativeSplatPath: true }}>
       <QueryClientProvider client={queryClient}>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route element={<AppLayout />}>
+          <Route
+            element={
+              <ProtectedRoutes>
+                <AppLayout />
+              </ProtectedRoutes>
+            }
+          >
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/user" element={<User />} />
+            <Route path="/users" element={<Users />} />
           </Route>
         </Routes>
       </QueryClientProvider>

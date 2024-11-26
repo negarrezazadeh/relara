@@ -6,9 +6,8 @@ import { Input } from "@/components/ui/input";
 
 function SideBar({ isSidebarOpen }) {
   const userLinks = [
-    { label: "Super Admin", href: "/super-admin" },
-    { label: "Admin", href: "/admin" },
-    { label: "User", href: "/user" },
+    { label: "Users List", href: "/users" },
+    { label: "Add User", href: "/users/create" },
   ];
 
   return (
@@ -18,9 +17,8 @@ function SideBar({ isSidebarOpen }) {
       <div className="block w-60 py-4 px-5 m-auto lg:hidden">
         <Input type="text" placeholder="Search" />
       </div>
-      <SidebarLink icon={<BiSolidCategory />} title="Dashboard" />
-      <SidebarAccordion icon={<FaUser />} title="User Role" links={userLinks} />
-      <SidebarAccordion icon={<FaUser />} title="User Role" links={userLinks} />
+      <SidebarLink icon={<BiSolidCategory />} title="Dashboard" link={"/dashboard"}/>
+      <SidebarAccordion icon={<FaUser />} title="User Management" links={userLinks} />
     </div>
   );
 }

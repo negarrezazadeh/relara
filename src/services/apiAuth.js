@@ -12,6 +12,6 @@ export const getUser = async () => {
 };
 
 export const getUsers = async () => {
-  const response = await http.get("/api/v1/users");
+  const response = await httpPrivate.get("/api/v1/users");
   return response.data;
 };
