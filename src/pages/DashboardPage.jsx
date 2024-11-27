@@ -1,7 +1,7 @@
 import Card from "@/ui/Card";
-import DashboardTitle from "@/ui/DashboarTitle";
+import DashboardTitle from "@/ui/DashboardTitle";
 
-function Dashboard() {
+function DashboardPage() {
   return (
     <>
       <DashboardTitle>Dashboard</DashboardTitle>
@@ -12,4 +12,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default DashboardPage;

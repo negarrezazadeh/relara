@@ -1,7 +1,13 @@
 import Card from "@/ui/Card";
 import useUsers from "./useUsers";
-import UserTable from "./UserTable";
-
+import UserItem from "./UserItem";
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 function UsersList() {
   const { isLoading, users } = useUsers();
@@ -10,9 +16,22 @@ function UsersList() {
 
   return (
     <Card>
-        {users.data.map((user,index) => (
-          <UserTable key={user.id} user={user} userIndex={index}/>
-        ))}
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]"></TableHead>
+            <TableHead>Name</TableHead>
+            <TableHead>Email</TableHead>
+            <TableHead>Role</TableHead>
+            <TableHead className="text-right">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {users.data.map((user, index) => (
+            <UserItem key={user.id} user={user} userIndex={index+1} />
+          ))}
+        </TableBody>
+      </Table>
     </Card>
   );
 }

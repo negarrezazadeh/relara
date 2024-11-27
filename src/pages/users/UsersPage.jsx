@@ -1,7 +1,7 @@
 import UsersList from "@/features/user/UsersList";
-import DashboardTitle from "@/ui/DashboarTitle";
+import DashboardTitle from "@/ui/DashboardTitle";
 
-function Users() {
+function UsersPage() {
   return (
     <div>
       <DashboardTitle>Users</DashboardTitle>
@@ -10,4 +10,4 @@ function Users() {
   );
 }
 
-export default Users;
+export default UsersPage;

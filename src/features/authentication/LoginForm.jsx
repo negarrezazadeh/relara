@@ -61,7 +61,7 @@ function LoginForm() {
           {errors.password && (
             <p className="mt-2 text-xs text-red-500">
               {errors.password.message}
-            </p>
+            </p>  
           )}
           <Button
             variant="outline"
