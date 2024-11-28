@@ -5,9 +5,11 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useDeleteUser } from "./useDeleteUser";
 import AlertDelete from "@/ui/AlertDelete";
+import { useAuth } from "@/context/AuthContextProvider";
 
 function UserItem({ user, userIndex }) {
   const { deleteUser, isPending, isIdle } = useDeleteUser();
+  const { user: currentUser } = useAuth();
 
   const handleDelete = (id) => {
     deleteUser(id);
@@ -23,14 +25,16 @@ function UserItem({ user, userIndex }) {
       <TableCell>{user.role}</TableCell>
       <TableCell className="text-right">
         <div className="flex items-center justify-end gap-x-3">
-          <AlertDelete onDelete={() => handleDelete(user.id)}>
-            <button
-              disabled={isPending}
-              className="text-base transition duration-200 ease-in-out hover:text-gray-400"
-            >
-              <RiDeleteBin5Line />
-            </button>
-          </AlertDelete>
+          {currentUser.id !== user.id && (
+            <AlertDelete onDelete={() => handleDelete(user.id)}>
+              <button
+                disabled={isPending}
+                className="text-base transition duration-200 ease-in-out hover:text-gray-400"
+              >
+                <RiDeleteBin5Line />
+              </button>
+            </AlertDelete>
+          )}
           <Link
             to={`/users/${user.id}`}
             className="text-base transition duration-200 ease-in-out hover:text-gray-400"

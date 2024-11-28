@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteUser as deleteUserApi } from "@/services/apiAuth";
 import toast from "react-hot-toast";
+import { deleteUser as deleteUserApi } from "@/services/apiAuth";
 
 export const useDeleteUser = () => {
   const queryClient = useQueryClient();

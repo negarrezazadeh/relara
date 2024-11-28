@@ -1,5 +1,5 @@
-import { getUser } from "@/services/apiAuth";
 import { useQuery } from "@tanstack/react-query";
+import { getUser } from "@/services/apiAuth";
 
 export const useUser = () => {
   const { data: user, isLoading } = useQuery({
@@ -12,5 +12,5 @@ export const useUser = () => {
     },
   });
 
-  return { user, isLoading, isAuthenticated: !!user };
+  return { user, isLoading, isAuthenticated: !!user, isAdmin: user?.role === "admin" };
 };

@@ -1,17 +1,20 @@
-import { useUser } from "@/features/authentication/useUser";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useUser } from "@/features/authentication/useUser";
+
 function ProtectedRoutes({ children }) {
   const navigate = useNavigate();
-  const { isAuthenticated, isLoading } = useUser();
+  const { isAuthenticated, isLoading, user, isAdmin } = useUser();
 
   useEffect(() => {
-    if (!isAuthenticated && !isLoading) navigate("/");
-  }, [isAuthenticated, isLoading, navigate]);
+    if ((!isAuthenticated || !isAdmin) && !isLoading) navigate("/");
+  }, [isAuthenticated, isLoading, isAdmin, navigate]);
 
   if (isLoading) return null;
-  if (isAuthenticated) return children;
+  console.log(user.role);
+
+  if (isAdmin && isAuthenticated) return children;
 }
 
 export default ProtectedRoutes;

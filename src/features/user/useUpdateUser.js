@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { createOrUpdateUser } from "@/services/apiAuth";
 import toast from "react-hot-toast";
+import { createOrUpdateUser } from "@/services/apiAuth";
 
 export default function useUpdateUser() {
   const { mutate: updateUser, isPending } = useMutation({

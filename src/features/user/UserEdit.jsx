@@ -1,6 +1,6 @@
+import { useParams } from "react-router-dom";
 import UserForm from "@/features/user/UserForm";
 import useGetUserById from "./useGetUserById";
-import { useParams } from "react-router-dom";
 import Loader from "@/ui/Loader";
 
 

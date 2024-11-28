@@ -1,8 +1,8 @@
 import { FaUser } from "react-icons/fa6";
 import { BiSolidCategory } from "react-icons/bi";
+import { Input } from "@/components/ui/input";
 import SidebarAccordion from "@/ui/SidebarAccordion";
 import SidebarLink from "@/ui/SidebarLink";
-import { Input } from "@/components/ui/input";
 
 function SideBar({ isSidebarOpen }) {
   const userLinks = [

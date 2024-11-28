@@ -1,7 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { createOrUpdateUser } from "@/services/apiAuth";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+
+import { createOrUpdateUser } from "@/services/apiAuth";
 
 export default function useAddUser() {
   const navigate = useNavigate()
