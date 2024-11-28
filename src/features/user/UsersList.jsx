@@ -8,11 +8,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Loader from "@/ui/Loader";
 
 function UsersList() {
   const { isLoading, users } = useUsers();
 
-  if (isLoading) return <p className="text-gray-200">Loading...</p>;
+  if (isLoading) return <Loader />;
 
   return (
     <Card>
@@ -28,7 +29,7 @@ function UsersList() {
         </TableHeader>
         <TableBody>
           {users.data.map((user, index) => (
-            <UserItem key={user.id} user={user} userIndex={index+1} />
+            <UserItem key={user.id} user={user} userIndex={index + 1} />
           ))}
         </TableBody>
       </Table>
