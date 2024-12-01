@@ -10,6 +10,9 @@ import UsersPage from "./pages/users/UsersPage";
 import EditUserPage from "./pages/users/EditUserPage";
 import AddUserPage from "./pages/users/AddUserPage";
 import AuthContextProvider from "./context/AuthContextProvider";
+import CategoriesPage from "./pages/categories/CategoriesPage";
+import CategoryAdd from "./features/category/CategoryAdd";
+import AddCategoryPage from "./pages/categories/AddCategoryPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,6 +41,8 @@ function App() {
               <Route path="/users" element={<UsersPage />} />
               <Route path="/users/:id" element={<EditUserPage />} />
               <Route path="/users/create" element={<AddUserPage />} />
+              <Route path="/categories" element={<CategoriesPage />} />
+              <Route path="/categories/create" element={<AddCategoryPage />} />
             </Route>
           </Routes>
         </AuthContextProvider>

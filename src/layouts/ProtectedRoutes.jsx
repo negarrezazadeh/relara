@@ -5,14 +5,13 @@ import { useUser } from "@/features/authentication/useUser";
 
 function ProtectedRoutes({ children }) {
   const navigate = useNavigate();
-  const { isAuthenticated, isLoading, user, isAdmin } = useUser();
+  const { isAuthenticated, isLoading, isAdmin } = useUser();
 
   useEffect(() => {
     if ((!isAuthenticated || !isAdmin) && !isLoading) navigate("/");
   }, [isAuthenticated, isLoading, isAdmin, navigate]);
 
   if (isLoading) return null;
-  console.log(user.role);
 
   if (isAdmin && isAuthenticated) return children;
 }

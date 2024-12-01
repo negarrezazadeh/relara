@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 
 function SidebarAccordion({ icon, title, links }) {
   const sidebarIcon = React.cloneElement(icon, {
-    className: `${icon.props.className || ""} text-gray-400 text-sm`,
+    className: `${icon.props.className || ""} text-gray-400`,
   });
   return (
     <>
@@ -23,7 +23,7 @@ function SidebarAccordion({ icon, title, links }) {
           </AccordionTrigger>
           {links.map((link) => (
             <AccordionContent key={link.label}>
-              <NavLink to={link.href} className="text-gray-200">
+              <NavLink to={link.href} className="text-gray-200 cursor-pointer">
                 {link.label}
               </NavLink>
             </AccordionContent>
