@@ -5,6 +5,11 @@ export const getCategories = async () => {
   return response.data;
 };
 
+export const getCategoryById = async (id) => {
+  const response = await httpPrivate.get(`/api/v1/categories/${id}`);
+  return response.data;
+};
+
 export const getAllCategories = async () => {
   const response = await httpPrivate.get("/api/v1/categories/all");
   return response.data;
@@ -22,3 +27,7 @@ export const createOrUpdateCategory = async ({ id, data }) => {
   }
 };
 
+export const deleteCategory = async (id) => {
+  const response = await httpPrivate.delete(`/api/v1/categories/${id}`);
+  return response.data;
+};
