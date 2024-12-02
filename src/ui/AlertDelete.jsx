@@ -18,8 +18,7 @@ function AlertDelete({ children, onDelete }) {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the user
-            account and remove user data from our servers.
+            This action cannot be undone. This will permanently delete the data from our servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

@@ -83,7 +83,7 @@ AlertDialogDescription.displayName =
 const AlertDialogAction = React.forwardRef(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Action
     ref={ref}
-    className={cn(buttonVariants(), className)}
+    className={cn(buttonVariants(),"bg-gray-700", className)}
     {...props}
   />
 ));

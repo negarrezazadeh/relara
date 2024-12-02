@@ -5,7 +5,11 @@ import toast from "react-hot-toast";
 export default function useDeleteCategory() {
   const queryClient = useQueryClient();
 
-  const { mutate: deleteCategory, isPending } = useMutation({
+  const {
+    mutate: deleteCategory,
+    isPending,
+    isIdle,
+  } = useMutation({
     mutationKey: ["delete_category"],
     mutationFn: (id) => deleteCategoryApi(id),
     onSuccess: () => {
@@ -19,5 +23,5 @@ export default function useDeleteCategory() {
     },
   });
 
-  return { deleteCategory, isPending };
+  return { deleteCategory, isPending, isIdle };
 }

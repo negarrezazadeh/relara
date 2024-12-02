@@ -1,13 +1,16 @@
 import { createOrUpdateCategory } from "@/services/apiCategory";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function useAddCategory() {
+  const navigate = useNavigate()
   const {mutate: addCategory , isPending} = useMutation({
     mutationFn: (data) => createOrUpdateCategory({data}),
     mutationKey: ["add_category"],
     onSuccess: () => {
       toast.success('Category added successfully');
+      navigate('/categories')
     },
     onError: (error) => {
       const errorMessage = error?.response?.data?.message || "An unexpected error occurred";

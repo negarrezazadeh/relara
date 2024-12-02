@@ -20,33 +20,51 @@ function UlListCat({ categories }) {
   };
 
   return (
-    <ul className="px-5">
+    <ul className="space-y-2 border-l border-gray-600 pl-4">
       {categories.map((category) => (
         <li key={category.id}>
-          <div className="flex items-center gap-x-3 py-1">
-            {category.name}
+          <div
+            className={`group flex items-center justify-between gap-x-3 rounded-lg px-2 py-2 transition ${
+              category.children.length > 0
+                ? "bg-gray-300 text-gray-800"
+                : "bg-gray-700 text-gray-200"
+            } `}
+          >
+            {/* category name */}
+            <div className="flex items-center gap-x-2">
+              <span className="text-sm font-medium">{category.name}</span>
+              {category.children.length > 0 && (
+                <span className="text-xs font-semibold">(Parent)</span>
+              )}
+            </div>
 
-            <AlertDelete
-              onDelete={() => handleDelete(category)}
-              disabled={category.children.length > 0}
-            >
-              <button
-                disabled={isPending || category.children.length > 0}
-                className={`text-sm transition duration-200 ease-in-out ${
-                  category.children.length > 0 ? "text-gray-300 cursor-not-allowed" : "hover:text-gray-400"
-                }`}
+            <div className="flex items-center gap-3">
+              {/* delete button */}
+              <AlertDelete
+                onDelete={() => handleDelete(category)}
+                disabled={category.children.length > 0}
               >
-                <RiDeleteBin5Line />
-              </button>
-            </AlertDelete>
-
-            <Link
-              to={`/categories/${category.id}`}
-              className="text-sm transition duration-200 ease-in-out hover:text-gray-400"
-            >
-              <MdOutlineEdit />
-            </Link>
+                <button
+                  disabled={isPending || category.children.length > 0}
+                  className={`rounded p-1 text-sm transition ${
+                    category.children.length > 0
+                      ? "cursor-not-allowed"
+                      : "text-gray-500 hover:text-red-600"
+                  }`}
+                >
+                  <RiDeleteBin5Line />
+                </button>
+              </AlertDelete>
+              {/* edit button */}
+              <Link
+                to={`/categories/${category.id}`}
+                className="rounded p-1 text-sm text-gray-500 transition hover:text-cyan-600"
+              >
+                <MdOutlineEdit />
+              </Link>
+            </div>
           </div>
+          {/* subcategories */}
           {category.children.length > 0 && (
             <UlListCat categories={category.children} />
           )}
