@@ -18,7 +18,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export function Select2({ list, label, defaultItem, onChange, value }) {
+export function Select2({ list, label, defaultItem, onChange, value, disabled }) {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(value || defaultItem.value);
 
@@ -33,11 +33,12 @@ export function Select2({ list, label, defaultItem, onChange, value }) {
   };
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open && !disabled} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
           role="combobox"
+          disabled={disabled}
           aria-expanded={open}
           className="w-[200px] justify-between border-gray-600 bg-transparent"
         >

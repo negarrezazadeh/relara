@@ -5,9 +5,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 function SidebarAccordion({ icon, title, links }) {
+  const location = useLocation();
+  
   const sidebarIcon = React.cloneElement(icon, {
     className: `${icon.props.className || ""} text-gray-400`,
   });
@@ -21,13 +23,23 @@ function SidebarAccordion({ icon, title, links }) {
               <span>{title}</span>
             </div>
           </AccordionTrigger>
-          {links.map((link) => (
-            <AccordionContent key={link.label}>
-              <NavLink to={link.href} className="text-gray-200 cursor-pointer">
-                {link.label}
-              </NavLink>
-            </AccordionContent>
-          ))}
+          {links.map((link) => {
+            const isActive = location.pathname === link.href; // check if link is active
+            return (
+              <AccordionContent key={link.label}>
+                <NavLink
+                  to={link.href}
+                  className={`cursor-pointer ${
+                    isActive
+                      ? "font-semibold text-violet-500" // style for active link
+                      : "text-gray-200" // default style
+                  }`}
+                >
+                  {link.label}
+                </NavLink>
+              </AccordionContent>
+            );
+          })}
         </AccordionItem>
       </Accordion>
     </>
