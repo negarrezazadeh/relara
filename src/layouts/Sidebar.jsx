@@ -1,6 +1,8 @@
 import { FaUser } from "react-icons/fa6";
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
+import { MdAccountTree } from "react-icons/md";
+
 import { Input } from "@/components/ui/input";
 import SidebarAccordion from "@/ui/SidebarAccordion";
 import SidebarLink from "@/ui/SidebarLink";
@@ -14,6 +16,11 @@ function SideBar({ isSidebarOpen }) {
   const categoryLinks = [
     { label: "Categories List", href: "/categories" },
     { label: "Add Category", href: "/categories/create" },
+  ];
+
+  const attributeLinks = [
+    { label: "Attributes List", href: "/attributes" },
+    { label: "Add Attribute", href: "/attributes/create" },
   ];
 
   return (
@@ -37,6 +44,11 @@ function SideBar({ isSidebarOpen }) {
         icon={<BiSolidCategoryAlt className="text-md" />}
         title="Category"
         links={categoryLinks}
+      />
+      <SidebarAccordion
+        icon={<MdAccountTree />}
+        title="Attribute"
+        links={attributeLinks}
       />
     </div>
   );

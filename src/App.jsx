@@ -14,6 +14,9 @@ import CategoriesPage from "./pages/categories/CategoriesPage";
 import CategoryAdd from "./features/category/CategoryAdd";
 import AddCategoryPage from "./pages/categories/AddCategoryPage";
 import EditCategoryPage from "./pages/categories/EditCategoryPage";
+import AttributesPage from "./pages/attributes/AttributesPage";
+import AddAttributePage from "./pages/attributes/AddAttributePage";
+import AddAttributeValuePage from "./pages/attributes/attributeValue/AddAttributeValuePage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,12 +42,24 @@ function App() {
               }
             >
               <Route path="/dashboard" element={<DashboardPage />} />
+              {/* user pages */}
               <Route path="/users" element={<UsersPage />} />
               <Route path="/users/:id" element={<EditUserPage />} />
               <Route path="/users/create" element={<AddUserPage />} />
+
+              {/* category pages */}
               <Route path="/categories" element={<CategoriesPage />} />
               <Route path="/categories/:id" element={<EditCategoryPage />} />
               <Route path="/categories/create" element={<AddCategoryPage />} />
+
+              {/* attribute pages */}
+              <Route path="/attributes" element={<AttributesPage />} />
+              <Route path="/attributes/:id" element={<AddAttributePage />} />
+              <Route path="/attributes/create" element={<AddAttributePage />} />
+              {/* attribute values pages */}
+              <Route path="/attribute-values/:id" element={<AddAttributePage />} />
+              <Route path="/attribute-values/create/:id" element={<AddAttributeValuePage />} />
+
             </Route>
           </Routes>
         </AuthContextProvider>
