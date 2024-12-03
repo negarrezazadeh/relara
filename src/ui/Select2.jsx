@@ -18,13 +18,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export function Select2({ list, label, defaultItem, onChange }) {
+export function Select2({ list, label, defaultItem, onChange, value }) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(defaultItem?.value || "");
+  const [selectedValue, setSelectedValue] = React.useState(value || defaultItem.value);
 
   const handleSelect = (selectedValue) => {
     if (selectedValue !== value) {
-      setValue(selectedValue);
+      setSelectedValue(selectedValue);
       if (onChange) {
         onChange(selectedValue);
       }
@@ -41,8 +41,9 @@ export function Select2({ list, label, defaultItem, onChange }) {
           aria-expanded={open}
           className="w-[200px] justify-between border-gray-600 bg-transparent"
         >
-          {value
-            ? list.find((item) => item.id === value)?.name || defaultItem.name
+          {selectedValue
+            ? list.find((item) => item.id === selectedValue)?.name ||
+              defaultItem.name
             : defaultItem.name}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -62,12 +63,12 @@ export function Select2({ list, label, defaultItem, onChange }) {
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === defaultItem.value ? "opacity-100" : "opacity-0"
+                    selectedValue === defaultItem.value ? "opacity-100" : "opacity-0"
                   )}
                 />
                 {defaultItem.name}
               </CommandItem>
-              {/* dynamic items*/}
+              {/* dynamic items */}
               {list.map((item) => (
                 <CommandItem
                   key={item.id}
@@ -77,7 +78,7 @@ export function Select2({ list, label, defaultItem, onChange }) {
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === item.id ? "opacity-100" : "opacity-0"
+                      selectedValue === item.id ? "opacity-100" : "opacity-0"
                     )}
                   />
                   {item.name}
@@ -90,3 +91,4 @@ export function Select2({ list, label, defaultItem, onChange }) {
     </Popover>
   );
 }
+

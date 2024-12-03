@@ -1,10 +1,10 @@
-import { TableCell, TableRow } from "@/components/ui/table";
+import { Link } from "react-router-dom";
 
+import { TableCell, TableRow } from "@/components/ui/table";
+import AlertDelete from "@/ui/AlertDelete";
 import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { Link } from "react-router-dom";
 import { useDeleteUser } from "./useDeleteUser";
-import AlertDelete from "@/ui/AlertDelete";
 import { useAuth } from "@/context/AuthContextProvider";
 
 function UserItem({ user, userIndex }) {

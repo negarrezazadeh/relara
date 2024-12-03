@@ -1,5 +1,5 @@
-import { getCategoryById } from "@/services/apiCategory";
 import { useQuery } from "@tanstack/react-query";
+import { getCategoryById } from "@/services/apiCategory";
 
 export default function useGetCategoryById(id) {
   const { data: category, isLoading } = useQuery({

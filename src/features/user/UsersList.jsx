@@ -1,4 +1,3 @@
-import Card from "@/ui/Card";
 import useUsers from "./useUsers";
 import UserItem from "./UserItem";
 import {
@@ -8,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Card from "@/ui/Card";
 import Loader from "@/ui/Loader";
 
 function UsersList() {

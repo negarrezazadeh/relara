@@ -1,13 +1,14 @@
 import { Controller, useForm } from "react-hook-form";
+
 import Card from "@/ui/Card";
+import Loader from "@/ui/Loader";
+import { Select2 } from "@/ui/Select2";
+import useAddCategory from "./useAddCategory";
+import useCategoriesAll from "./useCategoriesAll";
+import useUpdateCategory from "./useUpdateCategory";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import useAddCategory from "./useAddCategory";
-import useCategoriesAll from "./useCategoriesAll";
-import { Select2 } from "@/ui/Select2";
-import useUpdateCategory from "./useUpdateCategory";
-import Loader from "@/ui/Loader";
 
 function CategoryForm({ category }) {
   const {
@@ -18,7 +19,7 @@ function CategoryForm({ category }) {
   } = useForm({
     defaultValues: {
       name: category?.name || "",
-      category: category?.parent_id || 0,
+      category: category?.parent_id || null,
     },
   });
 
@@ -31,7 +32,7 @@ function CategoryForm({ category }) {
   const onSubmit = (data) => {
     const categoryData = {
       name: data.name,
-      parent_id: data.category === 0 ? null : data.category,
+      parent_id: category?.children?.length > 0 ? category.parent_id : data.category,
     };
 
     if (category) {
@@ -44,6 +45,7 @@ function CategoryForm({ category }) {
   return (
     <Card>
       <form onSubmit={handleSubmit(onSubmit)}>
+        {/* Name Field */}
         <div>
           <Label htmlFor="name">Name</Label>
           <Input
@@ -60,6 +62,7 @@ function CategoryForm({ category }) {
           )}
         </div>
 
+        {/* Category Selector */}
         <div className="mt-5 flex flex-col gap-3">
           <Label>Category</Label>
           <Controller
@@ -70,15 +73,22 @@ function CategoryForm({ category }) {
               <Select2
                 list={allCategories}
                 label="Category"
-                defaultItem={{ name: "Main Category", value: 0 }}
+                defaultItem={{ name: "Main Category", value: null }}
                 onChange={(value) => field.onChange(value)}
+                // disabled={category?.children?.length > 0} // Disable if it's a Parent
               />
             )}
           />
+          {category?.children?.length > 0 && (
+            <p className="text-sm text-yellow-500">
+              This category has subcategories. Its parent category cannot be changed.
+            </p>
+          )}
         </div>
 
+        {/* Submit Button */}
         <Button
-          disabled={isPending || updatePending}
+          disabled={isPending || updatePending || category?.children?.length > 0 }
           type="submit"
           className="mt-5 w-60 bg-white text-black hover:bg-gray-300"
         >
@@ -90,3 +100,4 @@ function CategoryForm({ category }) {
 }
 
 export default CategoryForm;
+

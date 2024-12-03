@@ -1,7 +1,8 @@
+import { useParams } from "react-router-dom";
+
 import Loader from "@/ui/Loader";
 import CategoryForm from "./CategoryForm";
 import useGetCategoryById from "./useGetCategoryById";
-import { useParams } from "react-router-dom";
 
 function CategoryEdit() {
   const { id } = useParams();

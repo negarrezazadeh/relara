@@ -1,12 +1,13 @@
-import Loader from "@/ui/Loader";
-import useCategories from "./useCategories";
-import Card from "@/ui/Card";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+
+import Loader from "@/ui/Loader";
+import Card from "@/ui/Card";
+import AlertDelete from "@/ui/AlertDelete";
+import useCategories from "./useCategories";
+import useDeleteCategory from "./useDeleteCategory";
 import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import useDeleteCategory from "./useDeleteCategory";
-import AlertDelete from "@/ui/AlertDelete";
-import toast from "react-hot-toast";
 
 function UlListCat({ categories }) {
   const { deleteCategory, isPending } = useDeleteCategory();
@@ -48,7 +49,7 @@ function UlListCat({ categories }) {
                   disabled={isPending || category.children.length > 0}
                   className={`rounded p-1 text-sm transition ${
                     category.children.length > 0
-                      ? "cursor-not-allowed"
+                      ? "opacity-50"
                       : "text-gray-500 hover:text-red-600"
                   }`}
                 >
