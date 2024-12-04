@@ -11,13 +11,21 @@ function AttributeForm({ attribute }) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      name: attribute?.name || "",
+    },
+  });
 
   const { addAttribute, isPending } = useAttributeAdd();
   const { updateAttribute, isPending: updatePending } = useAttributeUpdate();
 
   const onSubmit = (data) => {
-    addAttribute(data);
+    if (attribute) {
+      updateAttribute({ data, id: attribute.id });
+    } else {
+      addAttribute(data);
+    }
   };
 
   return (

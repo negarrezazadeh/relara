@@ -7,8 +7,26 @@ import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import useAttributes from "./useAttributes";
+import useDeleteAttribute from "./useDeleteAttribute";
+import toast from "react-hot-toast";
+import useDelete from "./attributeValue/useDelete";
 
 function UlListAttr({ attributes }) {
+  const { deleteAttribute, isPending } = useDeleteAttribute();
+  const { deleteAttributeValue, isPending: isPendingDelete } = useDelete();
+
+  const handleDelete = (attribute) => {
+    if (attribute.values.length > 0) {
+      toast.error("You cannot delete a category with subcategories");
+      return;
+    }
+    deleteAttribute(attribute.id);
+  };
+
+  const handleDeleteValue = (attribute) => {
+    deleteAttributeValue(attribute.id);
+  };
+
   return (
     <ul className="space-y-2 border-l border-gray-600 pl-4">
       {/* parent attribute */}
@@ -19,7 +37,7 @@ function UlListAttr({ attributes }) {
 
             <div className="flex items-center gap-3">
               {/* delete button */}
-              <AlertDelete>
+              <AlertDelete onDelete={() => handleDelete(attribute)}>
                 <button
                   disabled={attribute?.values?.length > 0}
                   className={`p-1 text-base transition ${
@@ -58,7 +76,7 @@ function UlListAttr({ attributes }) {
                   <span>{item.value}</span>
                   <div className="flex items-center gap-3">
                     {/* delete button */}
-                    <AlertDelete>
+                    <AlertDelete onDelete={() => handleDeleteValue(attribute)}>
                       <button className="p-1 text-sm text-gray-500 transition hover:text-red-600">
                         <RiDeleteBin5Line />
                       </button>

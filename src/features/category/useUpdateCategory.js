@@ -5,7 +5,7 @@ import { createOrUpdateCategory } from "@/services/apiCategory";
 
 export default function useUpdateCategory() {
   const navigate = useNavigate()
-  const { mutate: updateCategory, isLoading: isPending } = useMutation({
+  const { mutate: updateCategory, isPending } = useMutation({
     mutationFn: ({ id, data }) => createOrUpdateCategory({ id, data }),
     mutationKey: ["update_category"],
     onSuccess: () => {
