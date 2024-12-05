@@ -16,6 +16,7 @@ function CategoryForm({ category }) {
     handleSubmit,
     control,
     formState: { errors },
+    setError
   } = useForm({
     defaultValues: {
       name: category?.name || "",
@@ -30,6 +31,18 @@ function CategoryForm({ category }) {
   if (isLoading) return <Loader />;
 
   const onSubmit = (data) => {
+    console.log(data, allCategories);
+    
+    // Check for duplicate categories
+    const isDuplicate = allCategories.some(
+      (cat) => cat.name.toLowerCase() === data.name.toLowerCase()
+    )
+    if (isDuplicate) {
+      setError("name", { message: "This Category is already in use." });
+      return;
+    }
+
+    // Call add or update function
     const categoryData = {
       name: data.name,
       parent_id: data.category === 0 ? null : data.category,
@@ -49,7 +62,7 @@ function CategoryForm({ category }) {
           <Label htmlFor="name">Name</Label>
           <Input
             id="name"
-            className="mt-2"
+            className="my-2"
             type="text"
             placeholder="Category Name"
             {...register("name", {

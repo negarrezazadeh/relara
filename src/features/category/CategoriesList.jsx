@@ -25,7 +25,7 @@ function UlListCat({ categories }) {
       {categories.map((category) => (
         <li key={category.id}>
           <div
-            className={`group flex items-center justify-between gap-x-3 rounded-lg px-2 py-2 transition ${
+            className={`group flex items-center justify-between gap-x-3 rounded-lg px-2 py-2 transition mt-1 ${
               category.children.length > 0
                 ? "bg-gray-300 text-gray-800"
                 : "bg-gray-700 text-gray-200"
