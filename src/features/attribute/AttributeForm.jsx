@@ -5,12 +5,15 @@ import Card from "@/ui/Card";
 import { useForm } from "react-hook-form";
 import useAttributeAdd from "./useAttributeAdd";
 import useAttributeUpdate from "./useAttributeUpdate";
+import useAttributes from "./useAttributes";
+import useAttributeValues from "./attributeValue/useAttributeValues";
 
 function AttributeForm({ attribute }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setError
   } = useForm({
     defaultValues: {
       name: attribute?.name || "",
@@ -19,8 +22,29 @@ function AttributeForm({ attribute }) {
 
   const { addAttribute, isPending } = useAttributeAdd();
   const { updateAttribute, isPending: updatePending } = useAttributeUpdate();
+  const {attributes} = useAttributes()
+  const {attributeValues} = useAttributeValues()
 
-  const onSubmit = (data) => {
+  const onSubmit = (data) => {    
+    // Check for duplicate categories
+    const isDuplicate = attributes.some(
+      (attr) => attr.name.toLowerCase() === data.name.toLowerCase()
+    );
+    if (isDuplicate) {
+      setError("name", { message: "This Attribute is already in use." });
+      return;
+    }
+
+    // Check if the entered value is a SubAttribute
+    const isSubAttribute = attributeValues.some(
+      (attr) => attr.value.toLowerCase() === data.name.toLowerCase()
+    )
+    if (isSubAttribute) {
+      setError("name", { message: "This Attribute is already a SubAttribute." });
+      return;
+    }
+
+    // Call add or update function
     if (attribute) {
       updateAttribute({ data, id: attribute.id });
     } else {
@@ -36,7 +60,7 @@ function AttributeForm({ attribute }) {
           <Label htmlFor="name">Name</Label>
           <Input
             id="name"
-            className="mt-2"
+            className="my-2"
             type="text"
             placeholder="Category Name"
             {...register("name", {

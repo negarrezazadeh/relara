@@ -28,6 +28,11 @@ export const deleteAttribute = async (id) => {
 };
 
 // api for attribute values
+export const getAttributeValues = async () => {
+  const response = await httpPrivate.get("/api/v1/attribute-values");
+  return response.data;
+};
+
 export const getAttributeValueById = async (id) => {
   const response = await httpPrivate.get(`/api/v1/attribute-values/${id}`);
   return response.data;
@@ -45,7 +50,10 @@ export const createOrUpdateAttributeValue = async ({ id, data }) => {
     return response.data;
   } else {
     // if ID is provided, it's an update request
-    const response = await httpPrivate.put(`/api/v1/attribute-values/${id}`, data);
+    const response = await httpPrivate.put(
+      `/api/v1/attribute-values/${id}`,
+      data,
+    );
     return response.data;
   }
 };
