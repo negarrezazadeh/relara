@@ -9,10 +9,23 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 import useAttributes from "./useAttributes";
 import useDeleteAttribute from "./useDeleteAttribute";
 import toast from "react-hot-toast";
-import useDelete from "./attributeValue/useDelete";
+import useDelete from "./attributeValue/useDeleteAttributeValue";
+
+function AttributesList() {
+  const { attributes, isLoading } = useAttributes();
+
+  if (isLoading) return <Loader />;
+
+  return (
+    <Card>
+      <UlListAttr attributes={attributes} />
+    </Card>
+  );
+}
 
 function UlListAttr({ attributes }) {
   const { deleteAttribute, isPending } = useDeleteAttribute();
+
   const { deleteAttributeValue, isPending: isPendingDelete } = useDelete();
 
   const handleDelete = (attribute) => {
@@ -23,8 +36,8 @@ function UlListAttr({ attributes }) {
     deleteAttribute(attribute.id);
   };
 
-  const handleDeleteValue = (attribute) => {
-    deleteAttributeValue(attribute.id);
+  const handleDeleteValue = (item) => {
+    deleteAttributeValue(item.id);
   };
 
   return (
@@ -39,7 +52,7 @@ function UlListAttr({ attributes }) {
               {/* delete button */}
               <AlertDelete onDelete={() => handleDelete(attribute)}>
                 <button
-                  disabled={attribute?.values?.length > 0}
+                  disabled={attribute?.values?.length > 0 || isPending}
                   className={`p-1 text-base transition ${
                     attribute?.values?.length > 0
                       ? "opacity-50"
@@ -76,14 +89,14 @@ function UlListAttr({ attributes }) {
                   <span>{item.value}</span>
                   <div className="flex items-center gap-3">
                     {/* delete button */}
-                    <AlertDelete onDelete={() => handleDeleteValue(attribute)}>
-                      <button className="p-1 text-sm text-gray-500 transition hover:text-red-600">
+                    <AlertDelete onDelete={() => handleDeleteValue(item)}>
+                      <button className="p-1 text-sm text-gray-500 transition hover:text-red-600" disabled={isPendingDelete}>
                         <RiDeleteBin5Line />
                       </button>
                     </AlertDelete>
                     {/* edit button */}
                     <Link
-                      to={`/attributes/${attribute.id}`}
+                      to={`/attribute-values/${item.id}`}
                       className="p-1 text-sm text-gray-500 transition hover:text-cyan-600"
                     >
                       <MdOutlineEdit />
@@ -96,18 +109,6 @@ function UlListAttr({ attributes }) {
         </li>
       ))}
     </ul>
-  );
-}
-
-function AttributesList() {
-  const { attributes, isLoading } = useAttributes();
-
-  if (isLoading) return <Loader />;
-
-  return (
-    <Card>
-      <UlListAttr attributes={attributes} />
-    </Card>
   );
 }
 

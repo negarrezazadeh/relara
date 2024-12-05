@@ -28,6 +28,11 @@ export const deleteAttribute = async (id) => {
 };
 
 // api for attribute values
+export const getAttributeValueById = async (id) => {
+  const response = await httpPrivate.get(`/api/v1/attribute-values/${id}`);
+  return response.data;
+};
+
 export const deleteAttributeValue = async (id) => {
   const response = await httpPrivate.delete(`/api/v1/attribute-values/${id}`);
   return response.data;

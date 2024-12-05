@@ -11,12 +11,13 @@ import EditUserPage from "./pages/users/EditUserPage";
 import AddUserPage from "./pages/users/AddUserPage";
 import AuthContextProvider from "./context/AuthContextProvider";
 import CategoriesPage from "./pages/categories/CategoriesPage";
-import CategoryAdd from "./features/category/CategoryAdd";
 import AddCategoryPage from "./pages/categories/AddCategoryPage";
 import EditCategoryPage from "./pages/categories/EditCategoryPage";
 import AttributesPage from "./pages/attributes/AttributesPage";
 import AddAttributePage from "./pages/attributes/AddAttributePage";
 import AddAttributeValuePage from "./pages/attributes/attributeValue/AddAttributeValuePage";
+import EditAttributePage from "./pages/attributes/EditAttributePage";
+import EditAttributeValuePage from "./pages/attributes/attributeValue/EditAttributeValuePage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,11 +55,11 @@ function App() {
 
               {/* attribute pages */}
               <Route path="/attributes" element={<AttributesPage />} />
-              <Route path="/attributes/:id" element={<AddAttributePage />} />
+              <Route path="/attributes/:id" element={<EditAttributePage />} />
               <Route path="/attributes/create" element={<AddAttributePage />} />
               {/* attribute values pages */}
-              <Route path="/attribute-values/:id" element={<AddAttributePage />} />
               <Route path="/attribute-values/create/:id" element={<AddAttributeValuePage />} />
+              <Route path="/attribute-values/:id" element={<EditAttributeValuePage/>} />
 
             </Route>
           </Routes>
