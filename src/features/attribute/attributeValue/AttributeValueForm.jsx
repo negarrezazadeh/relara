@@ -25,8 +25,6 @@ function AttributeValueForm({ attribute, isEditing, attributeValue }) {
   const { attributeValues, isLoading } = useAttributeValues();
 
   const onSubmit = (data) => {
-    console.log(data, attribute, attributeValues);
-
     if (isLoading) return <Loader />;
 
     // Check for duplicate values
@@ -66,7 +64,7 @@ function AttributeValueForm({ attribute, isEditing, attributeValue }) {
             id="value"
             className="my-2"
             type="text"
-            placeholder="Attribute Name"
+            placeholder="Attribute value Name"
             {...register("value", {
               required: "Value is required",
             })}
@@ -86,21 +84,24 @@ function AttributeValueForm({ attribute, isEditing, attributeValue }) {
         </Button>
       </form>
       {/* Main Attribute Name Field */}
-      <div className="mt-5 border-l border-gray-600 pl-2">
-        <p className="rounded-lg bg-gray-300 px-3 py-2 pl-2 text-sm font-semibold text-violet-600">
-          {attribute.name}
-        </p>
-        <ul className="border-l border-gray-600 pl-2">
-          {attribute.values.map((value) => (
-            <li
-              key={value.id}
-              className="mt-2 rounded-lg bg-gray-700 px-3 py-2 pl-2 text-sm"
-            >
-              <p className="text-sm">{value.value}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {!isEditing && (
+        <div className="mt-5 border-l border-gray-600 pl-2">
+          <p className="rounded-lg bg-gray-300 px-3 py-2 pl-2 text-sm font-semibold text-violet-600">
+            {attribute?.name}
+          </p>
+
+          <ul className="border-l border-gray-600 pl-2">
+            {attribute?.values.map((value) => (
+              <li
+                key={value.id}
+                className="mt-2 rounded-lg bg-gray-700 px-3 py-2 pl-2 text-sm"
+              >
+                <p className="text-sm">{value.value}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </Card>
   );
 }
