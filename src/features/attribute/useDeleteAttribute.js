@@ -1,6 +1,6 @@
-import { deleteAttribute as deleteAttributeApi} from "@/services/apiAttribute";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { deleteAttribute as deleteAttributeApi} from "@/services/apiAttribute";
 
 export default function useDeleteAttribute() {
  const queryClient = useQueryClient()

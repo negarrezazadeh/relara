@@ -1,6 +1,6 @@
-import { createOrUpdateAttribute } from "@/services/apiAttribute";
-import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import { createOrUpdateAttribute } from "@/services/apiAttribute";
 
 export default function useAttributeAdd() {
   const { mutate: addAttribute , isPending} = useMutation({

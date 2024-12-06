@@ -1,12 +1,13 @@
+import { useForm } from "react-hook-form";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Card from "@/ui/Card";
-import { useForm } from "react-hook-form";
+import Loader from "@/ui/Loader";
 import useAddAttributeValue from "./useAddAttributeValue";
 import useUpdateAttributeValue from "./useUpdateAttributeValue";
 import useAttributeValues from "./useAttributeValues";
-import { Loader } from "lucide-react";
 
 function AttributeValueForm({ attribute, isEditing, attributeValue }) {
   const {

@@ -1,7 +1,7 @@
-import { createOrUpdateAttribute } from "@/services/apiAttribute";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { createOrUpdateAttribute } from "@/services/apiAttribute";
 
 export default function useAttributeUpdate() {
   const navigate = useNavigate()

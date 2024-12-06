@@ -1,8 +1,8 @@
+import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Card from "@/ui/Card";
-import { useForm } from "react-hook-form";
 import useAttributeAdd from "./useAttributeAdd";
 import useAttributeUpdate from "./useAttributeUpdate";
 import useAttributes from "./useAttributes";

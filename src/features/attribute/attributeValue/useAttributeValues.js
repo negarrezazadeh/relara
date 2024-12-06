@@ -1,5 +1,5 @@
-import { getAttributeValues } from "@/services/apiAttribute";
 import { useQuery } from "@tanstack/react-query";
+import { getAttributeValues } from "@/services/apiAttribute";
 
 export default function useAttributeValues() {
   const { data: attributeValues, isLoading } = useQuery({

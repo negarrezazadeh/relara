@@ -2,6 +2,7 @@ import { FaUser } from "react-icons/fa6";
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 import { MdAccountTree } from "react-icons/md";
+import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 
 import { Input } from "@/components/ui/input";
 import SidebarAccordion from "@/ui/SidebarAccordion";
@@ -21,6 +22,11 @@ function SideBar({ isSidebarOpen }) {
   const attributeLinks = [
     { label: "Attributes List", href: "/attributes" },
     { label: "Add Attribute", href: "/attributes/create" },
+  ];
+
+  const productLinks = [
+    { label: "Products List", href: "/products" },
+    { label: "Add Product", href: "/products/create" },
   ];
 
   return (
@@ -49,6 +55,11 @@ function SideBar({ isSidebarOpen }) {
         icon={<MdAccountTree />}
         title="Attribute"
         links={attributeLinks}
+      />
+      <SidebarAccordion
+        icon={<MdOutlineProductionQuantityLimits />        }
+        title="Product"
+        links={productLinks}
       />
     </div>
   );

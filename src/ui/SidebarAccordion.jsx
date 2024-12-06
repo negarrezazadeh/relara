@@ -1,11 +1,11 @@
 import React from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { NavLink, useLocation } from "react-router-dom";
 
 function SidebarAccordion({ icon, title, links }) {
   const location = useLocation();

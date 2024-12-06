@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
+
+import Loader from "@/ui/Loader";
 import AttributeValueForm from "./AttributeValueForm";
 import useGetAttributeById from "../useGetAttributeById";
-import Loader from "@/ui/Loader";
 
 function AddAttributeValue() {
   const { id } = useParams()
