@@ -1,6 +1,14 @@
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import Card from "@/ui/Card";
 import Loader from "@/ui/Loader";
 import useProducts from "./useProducts";
-import Card from "@/ui/Card";
+import ProductsItem from "./ProductsItem";
 
 function ProductsList() {
   const { products, isLoading } = useProducts();
@@ -9,13 +17,24 @@ function ProductsList() {
 
   return (
     <Card>
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            <p>{product.name}</p>
-          </li>
-        ))}
-      </ul>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]"></TableHead>
+            <TableHead>Product Name</TableHead>
+            <TableHead className="text-right">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {products.map((product, index) => (
+            <ProductsItem
+              key={product.id}
+              product={product}
+              productIndex={index + 1}
+            />
+          ))}
+        </TableBody>
+      </Table>
     </Card>
   );
 }
