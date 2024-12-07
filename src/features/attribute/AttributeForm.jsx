@@ -13,7 +13,8 @@ function AttributeForm({ attribute }) {
     register,
     handleSubmit,
     formState: { errors },
-    setError
+    setError,
+    reset
   } = useForm({
     defaultValues: {
       name: attribute?.name || "",
@@ -49,6 +50,7 @@ function AttributeForm({ attribute }) {
       updateAttribute({ data, id: attribute.id });
     } else {
       addAttribute(data);
+      reset()
     }
   };
 

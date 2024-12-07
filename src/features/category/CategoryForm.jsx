@@ -15,8 +15,9 @@ function CategoryForm({ category }) {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
-    setError
+    setError,
   } = useForm({
     defaultValues: {
       name: category?.name || "",
@@ -32,11 +33,11 @@ function CategoryForm({ category }) {
 
   const onSubmit = (data) => {
     console.log(data, allCategories);
-    
+
     // Check for duplicate categories
     const isDuplicate = allCategories.some(
-      (cat) => cat.name.toLowerCase() === data.name.toLowerCase()
-    )
+      (cat) => cat.name.toLowerCase() === data.name.toLowerCase(),
+    );
     if (isDuplicate) {
       setError("name", { message: "This Category is already in use." });
       return;
@@ -52,6 +53,7 @@ function CategoryForm({ category }) {
       updateCategory({ id: category.id, data: categoryData });
     } else {
       addCategory(categoryData);
+      reset();
     }
   };
 
@@ -91,9 +93,10 @@ function CategoryForm({ category }) {
               />
             )}
           />
-            {category?.children?.length > 0 && (
+          {category?.children?.length > 0 && (
             <p className="text-sm text-yellow-500">
-              This category has subcategories. Its parent category cannot be changed.
+              This category has subcategories. Its parent category cannot be
+              changed.
             </p>
           )}
         </div>
