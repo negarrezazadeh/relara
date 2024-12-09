@@ -21,6 +21,7 @@ import EditAttributeValuePage from "./pages/attributes/attributeValue/EditAttrib
 import ProductsPage from "./pages/products/ProductsPage";
 import AddProductPage from "./pages/products/AddProductPage";
 import EditProductPage from "./pages/products/EditProductPage";
+import AddProductVariantPage from "./pages/products/productVariant/AddProductVariantPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -74,6 +75,12 @@ function App() {
               <Route path="/products" element={<ProductsPage />} />
               <Route path="/products/:id" element={<EditProductPage />} />
               <Route path="/products/create" element={<AddProductPage />} />
+
+              {/* product variant pages */}
+              <Route
+                path="/product-variants/create/:id"
+                element={<AddProductVariantPage />}
+              />
             </Route>
           </Routes>
         </AuthContextProvider>
