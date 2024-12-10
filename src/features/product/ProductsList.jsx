@@ -22,7 +22,8 @@ function ProductsList() {
           <TableRow>
             <TableHead className="w-[100px]"></TableHead>
             <TableHead>Product Name</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
+            <TableHead>Product Variants</TableHead>
+            <TableHead className="text-right pr-14">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

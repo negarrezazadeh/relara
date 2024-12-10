@@ -2,11 +2,11 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import Card from "@/ui/Card";
 import useProductAdd from "./useProductAdd";
 import useProductUpdate from "./useProductUpdate";
 import useProducts from "./useProducts";
-import { Textarea } from "@/components/ui/textarea";
 
 function ProductForm({ product }) {
   const {
@@ -18,7 +18,7 @@ function ProductForm({ product }) {
   } = useForm({
     defaultValues: {
       name: product?.name || "",
-      description: product?.description || "", // اضافه کردن مقدار پیش‌فرض
+      description: product?.description || "", 
     },
   });
 
@@ -26,14 +26,17 @@ function ProductForm({ product }) {
   const { updateProduct, isPending: updatePending } = useProductUpdate();
   const { products } = useProducts();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data) => {    
+    // Trimmed Name
+    const trimmedName = data.name.trim();
+    
     // Call add or update function
     if (product) {
       updateProduct({ data, id: product.id });
     } else {
       // Check for duplicate categories
       const isDuplicate = products.some(
-        (pro) => pro.name.toLowerCase() === data.name.toLowerCase(),
+        (pro) => pro.name.toLowerCase().trim() === trimmedName.toLowerCase(),
       );
       if (isDuplicate) {
         setError("name", { message: "This Product Name is already in use." });

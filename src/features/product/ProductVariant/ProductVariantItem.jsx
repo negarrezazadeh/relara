@@ -1,9 +1,8 @@
-import React from "react";
-import { TableCell, TableRow } from "@/components/ui/table";
-import { MdOutlineEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { RiDeleteBin5Line } from "react-icons/ri";
+import { TableCell, TableRow } from "@/components/ui/table";
 import AlertDelete from "@/ui/AlertDelete";
+import { MdOutlineEdit } from "react-icons/md";
+import { RiDeleteBin5Line } from "react-icons/ri";
 import useDeleteProductVariant from "./useDeleteProductVariant";
 
 function ProductVariantItem({ variant, index, uniqueAttributes }) {

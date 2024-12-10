@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import ProductForm from "./ProductForm";
 import useGetProductById from "./useGetProductById";
-import { Loader } from "lucide-react";
+import Loader from "@/ui/Loader";
 
 function ProductEdit() {
   const { id } = useParams();

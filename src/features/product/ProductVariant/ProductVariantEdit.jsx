@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import ProductVariantForm from "./ProductVariantForm";
 import Loader from "@/ui/Loader";
+import ProductVariantForm from "./ProductVariantForm";
 import useGetProductVariantById from "./useGetProductVariantById";
 
 function ProductVariantEdit() {
@@ -18,6 +18,9 @@ function ProductVariantEdit() {
     },
     {},
   );
+
+  console.log(productVariant);
+  
 
   return (
     <ProductVariantForm
