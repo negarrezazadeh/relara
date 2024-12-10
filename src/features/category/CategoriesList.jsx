@@ -8,6 +8,7 @@ import useCategories from "./useCategories";
 import useDeleteCategory from "./useDeleteCategory";
 import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { Button } from "@/components/ui/button";
 
 function UlListCat({ categories }) {
   const { deleteCategory, isPending } = useDeleteCategory();
@@ -25,7 +26,7 @@ function UlListCat({ categories }) {
       {categories.map((category) => (
         <li key={category.id}>
           <div
-            className={`group flex items-center justify-between gap-x-3 rounded-lg px-2 py-2 transition mt-1 ${
+            className={`group mt-1 flex items-center justify-between gap-x-3 rounded-lg px-2 py-2 transition ${
               category.children.length > 0
                 ? "bg-gray-300 text-gray-800"
                 : "bg-gray-700 text-gray-200"
@@ -82,7 +83,20 @@ function CategoriesList() {
 
   return (
     <Card>
-      <UlListCat categories={categories} />
+      {categories.length > 0 ? (
+        <UlListCat categories={categories} />
+      ) : (
+        <div className="flex flex-col items-center">
+          <p className="text-center font-semibold text-gray-100">
+            No categories found. Do you want to add one?
+          </p>
+          <Link to={`/categories/create`}>
+            <Button className="mx-auto mt-4 bg-gray-200 text-black hover:bg-gray-700 hover:text-white">
+              Add Product
+            </Button>
+          </Link>
+        </div>
+      )}
     </Card>
   );
 }

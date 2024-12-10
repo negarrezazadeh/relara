@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+import toast from "react-hot-toast";
 import Loader from "@/ui/Loader";
 import Card from "@/ui/Card";
 import AlertDelete from "@/ui/AlertDelete";
@@ -8,20 +9,8 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import useAttributes from "./useAttributes";
 import useDeleteAttribute from "./useDeleteAttribute";
-import toast from "react-hot-toast";
 import useDelete from "./attributeValue/useDeleteAttributeValue";
-
-function AttributesList() {
-  const { attributes, isLoading } = useAttributes();
-
-  if (isLoading) return <Loader />;
-
-  return (
-    <Card>
-      <UlListAttr attributes={attributes} />
-    </Card>
-  );
-}
+import { Button } from "@/components/ui/button";
 
 function UlListAttr({ attributes }) {
   const { deleteAttribute, isPending } = useDeleteAttribute();
@@ -90,7 +79,10 @@ function UlListAttr({ attributes }) {
                   <div className="flex items-center gap-3">
                     {/* delete button */}
                     <AlertDelete onDelete={() => handleDeleteValue(item)}>
-                      <button className="p-1 text-sm text-gray-500 transition hover:text-red-600" disabled={isPendingDelete}>
+                      <button
+                        className="p-1 text-sm text-gray-500 transition hover:text-red-600"
+                        disabled={isPendingDelete}
+                      >
                         <RiDeleteBin5Line />
                       </button>
                     </AlertDelete>
@@ -109,6 +101,31 @@ function UlListAttr({ attributes }) {
         </li>
       ))}
     </ul>
+  );
+}
+
+function AttributesList() {
+  const { attributes, isLoading } = useAttributes();
+
+  if (isLoading) return <Loader />;
+
+  return (
+    <Card>
+      {attributes.length > 0 ? (
+        <UlListAttr attributes={attributes} />
+      ) : (
+        <div className="flex flex-col items-center">
+          <p className="text-center font-semibold text-gray-100">
+            No attributes found. Do you want to add one?
+          </p>
+          <Link to={`/attributes/create`}>
+            <Button className="mx-auto mt-4 bg-gray-200 text-black hover:bg-gray-700 hover:text-white">
+              Add Product
+            </Button>
+          </Link>
+        </div>
+      )}
+    </Card>
   );
 }
 
