@@ -1,3 +1,4 @@
+import { Link, useParams } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -5,11 +6,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
 import Card from "@/ui/Card";
 import Loader from "@/ui/Loader";
-import useGetProductById from "../useGetProductById";
 import ProductVariantItem from "./ProductVariantItem";
-import { useParams } from "react-router-dom";
+import useGetProductById from "../useGetProductById";
 
 function ProductVariantsList() {
   const { id } = useParams();
@@ -33,30 +34,43 @@ function ProductVariantsList() {
           {product.name}
         </span>
       </p>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead></TableHead>
-            {uniqueAttributes.map((attribute, index) => (
-              <TableHead key={index}>{attribute}</TableHead>
+      {product.variants.length > 0 ? (
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead></TableHead>
+              {uniqueAttributes.map((attribute, index) => (
+                <TableHead key={index}>{attribute}</TableHead>
+              ))}
+              <TableHead>Price</TableHead>
+              <TableHead>Stock</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead className="text-right">Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {product.variants.map((variant, index) => (
+              <ProductVariantItem
+                key={variant.id}
+                variant={variant}
+                index={index}
+                uniqueAttributes={uniqueAttributes}
+              />
             ))}
-            <TableHead>Price</TableHead>
-            <TableHead>Stock</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {product.variants.map((variant, index) => (
-            <ProductVariantItem
-              key={variant.id}
-              variant={variant}
-              index={index}
-              uniqueAttributes={uniqueAttributes}
-            />
-          ))}
-        </TableBody>
-      </Table>
+          </TableBody>
+        </Table>
+      ) : (
+        <div className="flex flex-col items-center">
+          <p className="text-center font-semibold text-gray-100">
+            This Product has no variants. Do You Want to add?
+          </p>
+          <Link to={`/product-variants/create/${product.id}`}>
+            <Button className="mx-auto mt-4 bg-gray-200 text-black hover:bg-gray-700 hover:text-white">
+              Add Variant
+            </Button>
+          </Link>
+        </div>
+      )}
     </Card>
   );
 }
