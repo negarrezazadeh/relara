@@ -6,6 +6,7 @@ import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import useDeleteProduct from "./useDeleteProduct";
 import { IoMdAddCircleOutline } from "react-icons/io";
+import { BiMessageSquareDetail } from "react-icons/bi";
 
 function ProductsItem({ product, productIndex }) {
   const { deleteProduct, isPending, isIdle } = useDeleteProduct();
@@ -42,6 +43,13 @@ function ProductsItem({ product, productIndex }) {
             className="text-base transition duration-200 ease-in-out hover:text-gray-400"
           >
             <IoMdAddCircleOutline />
+          </Link>
+
+          <Link
+            to={`/product-variants/${product.id}`}
+            className="text-base transition duration-200 ease-in-out hover:text-gray-400"
+          >
+            <BiMessageSquareDetail />
           </Link>
         </div>
       </TableCell>
