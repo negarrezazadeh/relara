@@ -1,11 +1,11 @@
-import AddProductVariant from "@/features/product/ProductVariant/AddProductVariant";
+import ProductVariantAdd from "@/features/product/ProductVariant/ProductVariantAdd";
 import DashboardTitle from "@/ui/DashboardTitle";
 
 function AddProductVariantPage() {
   return (
     <div>
       <DashboardTitle>Add Product Variant</DashboardTitle>
-      <AddProductVariant/>
+      <ProductVariantAdd/>
     </div>
   );
 }

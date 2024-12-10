@@ -12,20 +12,53 @@ import { Button } from "@/components/ui/button";
 import Loader from "@/ui/Loader";
 import { Input } from "@/components/ui/input";
 import { Controller, useForm } from "react-hook-form";
+import { Select2 } from "@/ui/Select2";
+import useProductVariantAdd from "./useProductVariantAdd";
+import useProductVariantUpdate from "./useProductVariantUpdate";
 
-function ProductVariantForm({ product }) {
+function ProductVariantForm({ product, isEditing, ProductAttributes }) {
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: isEditing
+      ? {
+          attributes: ProductAttributes || {},
+          price: product.price || "",
+          stock: product.stock || "",
+          status: product.status || "available",
+        }
+      : {},
+  });
+
   const { attributes, isLoading } = useAttributes();
+  const { addProductVariant, isPending } = useProductVariantAdd();
+  const { updateProductVariant, isPending: updatePending } =
+    useProductVariantUpdate();
 
   if (isLoading) return <Loader />;
 
   const onSubmit = async (data) => {
-    console.log(data);
+    const attributeValues = Object.values(data.attributes || {}).map((id) => ({
+      id, // Pass selected attribute ID
+    }));
+
+    const finalData = {
+      product_id: product.id,
+      attribute_values: attributeValues,
+      price: data.price,
+      stock: data.stock,
+      status: data.status,
+    };
+
+    if (isEditing) {
+      updateProductVariant({ id: product.id, data: finalData });
+      return;
+    } else {
+      addProductVariant(finalData);
+    }
   };
 
   return (
@@ -34,7 +67,6 @@ function ProductVariantForm({ product }) {
         {product.name}
       </p>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* variant accordion */}
         <Accordion type="multiple" className="mt-5">
           {attributes.map((attribute, index) => (
             <AccordionItem key={index} value={`item-${index}`}>
@@ -50,14 +82,17 @@ function ProductVariantForm({ product }) {
                       onValueChange={field.onChange}
                       className="mt-3 flex flex-col gap-2"
                     >
-                      {attribute.values.map((value, i) => (
-                        <div key={i} className="flex items-center space-x-2">
+                      {attribute.values.map((item, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center space-x-2"
+                        >
                           <RadioGroupItem
-                            value={value.value}
-                            id={`${attribute.name}-${value.value}`}
+                            value={item.id.toString()} // Ensure ID is string
+                            id={`${attribute.name}-${item.value}`}
                           />
-                          <Label htmlFor={`${attribute.name}-${value.value}`}>
-                            {value.value}
+                          <Label htmlFor={`${attribute.name}-${item.value}`}>
+                            {item.value}
                           </Label>
                         </div>
                       ))}
@@ -74,7 +109,7 @@ function ProductVariantForm({ product }) {
           ))}
         </Accordion>
 
-        {/* price */}
+        {/* Rest of the form */}
         <div className="my-6">
           <Label htmlFor="price">Price</Label>
           <Input
@@ -91,8 +126,44 @@ function ProductVariantForm({ product }) {
           )}
         </div>
 
-        {/* دکمه ثبت */}
+        <div className="my-6">
+          <Label htmlFor="stock">Stock</Label>
+          <Input
+            id="stock"
+            type="number"
+            placeholder="Enter Stock"
+            {...register("stock", {
+              required: "Stock is required",
+            })}
+            className="my-2"
+          />
+          {errors.stock && (
+            <p className="text-sm text-red-500">{errors.stock.message}</p>
+          )}
+        </div>
+
+        <div className="mt-5 flex flex-col gap-3">
+          <Label>Status</Label>
+          <Controller
+            name="status"
+            control={control}
+            render={({ field }) => (
+              <Select2
+                list={[
+                  { id: "unavailable", name: "unavailable" },
+                  { id: "call", name: "call" },
+                ]}
+                label="Status"
+                defaultItem={{ name: "available", value: "available" }}
+                onChange={(value) => field.onChange(value)}
+                value={field.value}
+              />
+            )}
+          />
+        </div>
+
         <Button
+          disabled={isPending || updatePending}
           type="submit"
           className="mt-5 w-full bg-gray-200 text-black hover:bg-gray-400"
         >
@@ -104,3 +175,4 @@ function ProductVariantForm({ product }) {
 }
 
 export default ProductVariantForm;
+

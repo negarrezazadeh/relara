@@ -27,7 +27,7 @@ export const deleteAttribute = async (id) => {
   return response.data;
 };
 
-// api for attribute values
+// attribute values APIS
 export const getAttributeValues = async () => {
   const response = await httpPrivate.get("/api/v1/attribute-values");
   return response.data;

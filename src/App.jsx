@@ -22,6 +22,8 @@ import ProductsPage from "./pages/products/ProductsPage";
 import AddProductPage from "./pages/products/AddProductPage";
 import EditProductPage from "./pages/products/EditProductPage";
 import AddProductVariantPage from "./pages/products/productVariant/AddProductVariantPage";
+import EditProductVariantPage from "./pages/products/productVariant/EditProductVariantPage";
+import ProductVariantsPage from "./pages/products/productVariant/ProductVariantPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -80,6 +82,14 @@ function App() {
               <Route
                 path="/product-variants/create/:id"
                 element={<AddProductVariantPage />}
+              />
+               <Route
+                path="/product-variants/:id"
+                element={<ProductVariantsPage />}
+              />
+               <Route
+                path="/product-variants/edit/:id"
+                element={<EditProductVariantPage />}
               />
             </Route>
           </Routes>
