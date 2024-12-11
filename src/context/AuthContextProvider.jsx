@@ -6,6 +6,7 @@ const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
   const { user, isAdmin } = useUser();
+  
   const value = useMemo(() => {
     return { user, isAdmin };
   }, [user, isAdmin]);
