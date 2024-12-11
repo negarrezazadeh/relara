@@ -54,13 +54,13 @@ function UlListAttr({ attributes }) {
               {/* edit button */}
               <Link
                 to={`/attributes/${attribute.id}`}
-                className="p-1 text-base text-gray-500 transition hover:text-cyan-600"
+                className="p-1 text-base text-gray-200 transition hover:hover:text-gray-400"
               >
                 <MdOutlineEdit />
               </Link>
               <Link
                 to={`/attribute-values/create/${attribute.id}`}
-                className="p-1 text-base text-gray-500 transition hover:text-cyan-600"
+                className="p-1 text-base text-gray-200 transition hover:hover:text-gray-400"
               >
                 <IoMdAddCircleOutline />
               </Link>
@@ -89,7 +89,7 @@ function UlListAttr({ attributes }) {
                     {/* edit button */}
                     <Link
                       to={`/attribute-values/${item.id}`}
-                      className="p-1 text-sm text-gray-500 transition hover:text-cyan-600"
+                      className="p-1 text-sm text-gray-200 transition hover:hover:text-gray-400"
                     >
                       <MdOutlineEdit />
                     </Link>
@@ -114,13 +114,13 @@ function AttributesList() {
       {attributes.length > 0 ? (
         <UlListAttr attributes={attributes} />
       ) : (
-        <div className="flex flex-col items-center">
-          <p className="text-center font-semibold text-gray-100">
+        <div className="flex flex-col items-center my-2">
+          <p className="text-center font-semibold text-violet-400">
             No attributes found. Do you want to add one?
           </p>
           <Link to={`/attributes/create`}>
-            <Button className="mx-auto mt-4 bg-gray-200 text-black hover:bg-gray-700 hover:text-white">
-              Add Product
+            <Button className="mx-auto mt-5 bg-gray-200 text-black hover:bg-gray-700 hover:text-white">
+              Add Attribute
             </Button>
           </Link>
         </div>

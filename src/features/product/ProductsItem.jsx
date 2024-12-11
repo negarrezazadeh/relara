@@ -23,7 +23,7 @@ function ProductsItem({ product, productIndex }) {
       className={`odd:bg-gray-700/50 even:bg-gray-700/70 ${!isIdle && "opacity-50"}`}
     >
       <TableCell>{productIndex}</TableCell>
-      <TableCell className="text-violet-400">{product.name}</TableCell>
+      <TableCell className="text-violet-400"><Link to={`/product-variants/create/${product.id}`}>{product.name}</Link></TableCell>
       <TableCell>{product.variants.length}</TableCell>
       <TableCell className="text-right">
         <div className="flex items-center justify-end gap-x-3">

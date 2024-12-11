@@ -118,8 +118,8 @@ function ProductVariantForm({ product, isEditing, ProductAttributes }) {
         </Accordion>
 
         {/* Rest of the form */}
-        <div className="flex gap-5 items-center mt-5">
-          <div className="my-6">
+        <div className="flex gap-5 lg:items-center mt-5 w-full flex-col lg:flex-row">
+          <div className="lg:my-6">
             <Label htmlFor="price">Price</Label>
             <Input
               id="price"
@@ -135,7 +135,7 @@ function ProductVariantForm({ product, isEditing, ProductAttributes }) {
             )}
           </div>
 
-          <div className="my-6">
+          <div className="lg:my-6">
             <Label htmlFor="stock">Stock</Label>
             <Input
               id="stock"
@@ -151,7 +151,7 @@ function ProductVariantForm({ product, isEditing, ProductAttributes }) {
             )}
           </div>
 
-          <div className="flex flex-col my-6">
+          <div className="flex flex-col lg:my-6">
             <Label className="mb-2">Status</Label>
             <Controller
               name="status"

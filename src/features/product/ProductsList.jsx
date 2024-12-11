@@ -40,12 +40,12 @@ function ProductsList() {
           </TableBody>
         </Table>
       ) : (
-        <div className="flex flex-col items-center">
-          <p className="text-center font-semibold text-gray-100">
+        <div className="flex flex-col items-center my-2">
+          <p className="text-center font-semibold text-violet-400">
             No products found. Do you want to add one?
           </p>
           <Link to={`/products/create`}>
-            <Button className="mx-auto mt-4 bg-gray-200 text-black hover:bg-gray-700 hover:text-white">
+            <Button className="mx-auto mt-5 bg-gray-200 text-black hover:bg-gray-700 hover:text-white">
               Add Product
             </Button>
           </Link>
