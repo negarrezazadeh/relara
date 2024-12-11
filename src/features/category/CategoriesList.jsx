@@ -51,7 +51,7 @@ function UlListCat({ categories }) {
                   className={`rounded p-1 text-sm transition ${
                     category.children.length > 0
                       ? "opacity-50"
-                      : "text-gray-500 hover:text-red-600"
+                      : "hover:text-red-600"
                   }`}
                 >
                   <RiDeleteBin5Line />
@@ -60,7 +60,7 @@ function UlListCat({ categories }) {
               {/* edit button */}
               <Link
                 to={`/categories/${category.id}`}
-                className="rounded p-1 text-sm text-gray-500 transition hover:text-cyan-600"
+                className="rounded p-1 text-sm transition hover:text-violet-500"
               >
                 <MdOutlineEdit />
               </Link>

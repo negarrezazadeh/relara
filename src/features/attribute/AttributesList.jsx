@@ -11,6 +11,7 @@ import useAttributes from "./useAttributes";
 import useDeleteAttribute from "./useDeleteAttribute";
 import useDelete from "./attributeValue/useDeleteAttributeValue";
 import { Button } from "@/components/ui/button";
+import { TooltipWrapper } from "@/ui/TooltipWrapper";
 
 function UlListAttr({ attributes }) {
   const { deleteAttribute, isPending } = useDeleteAttribute();
@@ -45,7 +46,7 @@ function UlListAttr({ attributes }) {
                   className={`p-1 text-base transition ${
                     attribute?.values?.length > 0
                       ? "opacity-50"
-                      : "text-gray-500 hover:text-red-600"
+                      : "text-gray-400 hover:text-red-600"
                   }`}
                 >
                   <RiDeleteBin5Line />
@@ -54,16 +55,19 @@ function UlListAttr({ attributes }) {
               {/* edit button */}
               <Link
                 to={`/attributes/${attribute.id}`}
-                className="p-1 text-base text-gray-200 transition hover:hover:text-gray-400"
+                className="p-1 text-base text-gray-500 transition hover:text-violet-500"
               >
                 <MdOutlineEdit />
               </Link>
-              <Link
-                to={`/attribute-values/create/${attribute.id}`}
-                className="p-1 text-base text-gray-200 transition hover:hover:text-gray-400"
-              >
-                <IoMdAddCircleOutline />
-              </Link>
+              {/* add value button */}
+              <TooltipWrapper tooltipText={"Add Attribute Value"}>
+                <Link
+                  to={`/attribute-values/create/${attribute.id}`}
+                  className="p-1 text-base text-gray-500 transition hover:text-violet-500"
+                >
+                  <IoMdAddCircleOutline />
+                </Link>
+              </TooltipWrapper>
             </div>
           </div>
 
@@ -80,7 +84,7 @@ function UlListAttr({ attributes }) {
                     {/* delete button */}
                     <AlertDelete onDelete={() => handleDeleteValue(item)}>
                       <button
-                        className="p-1 text-sm text-gray-500 transition hover:text-red-600"
+                        className="p-1 text-sm text-gray-200 transition hover:text-red-600"
                         disabled={isPendingDelete}
                       >
                         <RiDeleteBin5Line />
@@ -89,7 +93,7 @@ function UlListAttr({ attributes }) {
                     {/* edit button */}
                     <Link
                       to={`/attribute-values/${item.id}`}
-                      className="p-1 text-sm text-gray-200 transition hover:hover:text-gray-400"
+                      className="p-1 text-sm text-gray-200 transition hover:text-violet-400"
                     >
                       <MdOutlineEdit />
                     </Link>
@@ -114,7 +118,7 @@ function AttributesList() {
       {attributes.length > 0 ? (
         <UlListAttr attributes={attributes} />
       ) : (
-        <div className="flex flex-col items-center my-2">
+        <div className="my-2 flex flex-col items-center">
           <p className="text-center font-semibold text-violet-400">
             No attributes found. Do you want to add one?
           </p>

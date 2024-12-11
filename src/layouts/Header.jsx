@@ -1,10 +1,8 @@
 import { Input } from "@/components/ui/input";
 import { FaBell } from "react-icons/fa6";
-import { BsFillPersonFill } from "react-icons/bs";
 import { IoSunnyOutline } from "react-icons/io5";
 import { HiMenuAlt1 } from "react-icons/hi";
 import { useAuth } from "@/context/AuthContextProvider";
-import { Button } from "@/components/ui/button";
 import { DropDown } from "@/ui/DropDown";
 
 function Header({ isSidebarOpen, setIsSidebarOpen }) {
@@ -32,20 +30,14 @@ function Header({ isSidebarOpen, setIsSidebarOpen }) {
           <button>
             <IoSunnyOutline className="text-2xl text-gray-400" />
           </button>
-          {user ? (
-            <DropDown>
-              <p
-                variant="outline"
-                className="text-base font-semibold text-violet-400 cursor-pointer"
-              >
-                Hello {user.name}!
-              </p>
-            </DropDown>
-          ) : (
-            <button>
-              <BsFillPersonFill className="text-2xl text-gray-400" />
-            </button>
-          )}
+          <DropDown>
+            <p
+              variant="outline"
+              className="cursor-pointer text-base font-semibold text-violet-400"
+            >
+              Hello {user.name}!
+            </p>
+          </DropDown>
         </div>
       </div>
     </header>

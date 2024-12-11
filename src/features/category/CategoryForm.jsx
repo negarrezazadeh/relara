@@ -32,8 +32,6 @@ function CategoryForm({ category }) {
   if (isLoading) return <Loader />;
 
   const onSubmit = (data) => {
-    console.log(data, allCategories);
-
     // Check for duplicate categories
     const isDuplicate = allCategories.some(
       (cat) => cat.name.toLowerCase() === data.name.toLowerCase(),
