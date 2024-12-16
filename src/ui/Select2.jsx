@@ -29,7 +29,7 @@ export function Select2({
 }) {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(
-    value || defaultItem?.value,
+    value || defaultItem.value,
   );
 
   const handleSelect = (selectedValue) => {
@@ -54,8 +54,8 @@ export function Select2({
         >
           {selectedValue
             ? list.find((item) => item.id === selectedValue)?.name ||
-              defaultItem?.name
-            : defaultItem?.name}
+              defaultItem.name
+            : defaultItem.name}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -68,18 +68,18 @@ export function Select2({
               {/* default item */}
               <CommandItem
                 key="default"
-                value={defaultItem?.value}
-                onSelect={() => handleSelect(defaultItem?.value)}
+                value={defaultItem.value}
+                onSelect={() => handleSelect(defaultItem.value)}
               >
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    selectedValue === defaultItem?.value
+                    selectedValue === defaultItem.value
                       ? "opacity-100"
                       : "opacity-0",
                   )}
                 />
-                {defaultItem?.name}
+                {defaultItem.name}
               </CommandItem>
               {/* dynamic items */}
               {list.map((item) => (

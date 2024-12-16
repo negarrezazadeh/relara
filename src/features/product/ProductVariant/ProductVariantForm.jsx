@@ -30,7 +30,7 @@ function ProductVariantForm({ product, isEditing, ProductAttributes }) {
           stock: product.stock || "",
           status: product.status || "available",
         }
-      : {},
+      : { status: "available" }, 
   });
 
   const { attributes, isLoading } = useAttributes();
@@ -64,7 +64,7 @@ function ProductVariantForm({ product, isEditing, ProductAttributes }) {
 
   return (
     <Card>
-      <p className="border-l border-gray-600 pl-2 text-xl font-semibold text-violet-500 mt-2">
+      <p className="border-l border-gray-600 pl-2 text-xl font-semibold text-violet-500">
         {product.name || product.product_name}
       </p>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -165,11 +165,11 @@ function ProductVariantForm({ product, isEditing, ProductAttributes }) {
               render={({ field }) => (
                 <Select2
                   list={[
-                    { id: "unavailable", name: "Unavailable" },
-                    { id: "call", name: "Call" },
+                    { id: "unavailable", name: "unavailable" },
+                    { id: "call", name: "call" },
                   ]}
                   label="Status"
-                  defaultItem={{ name: "Available", value: "available" }}
+                  defaultItem={{ name: "available", value: "available" }}
                   onChange={(value) => field.onChange(value)}
                   value={field.value}
                 />
