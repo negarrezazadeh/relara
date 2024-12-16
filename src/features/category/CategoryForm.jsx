@@ -76,6 +76,7 @@ function CategoryForm({ category }) {
 
         <div className="mt-5 flex flex-col gap-3">
           <Label>Category</Label>
+
           <Controller
             name="category"
             defaultValue={0}
@@ -88,9 +89,11 @@ function CategoryForm({ category }) {
                 onChange={(value) => field.onChange(value)}
                 value={field.value}
                 disabled={category?.children?.length > 0}
+                contentWidth="w-[200px]"
               />
             )}
           />
+
           {category?.children?.length > 0 && (
             <p className="text-sm text-yellow-500">
               This category has subcategories. Its parent category cannot be
@@ -102,7 +105,7 @@ function CategoryForm({ category }) {
         <Button
           disabled={isPending || updatePending}
           type="submit"
-          className="mt-5 w-60 bg-white text-black hover:bg-gray-300"
+          className="mt-10 w-52 bg-white text-black hover:bg-gray-300"
         >
           Submit
         </Button>

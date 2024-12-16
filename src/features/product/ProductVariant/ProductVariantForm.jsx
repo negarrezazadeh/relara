@@ -64,18 +64,20 @@ function ProductVariantForm({ product, isEditing, ProductAttributes }) {
 
   return (
     <Card>
-      <p className="border-l border-gray-600 pl-2 text-xl font-semibold text-violet-500">
+      <p className="border-l border-gray-600 pl-2 text-xl font-semibold text-violet-500 mt-2">
         {product.name || product.product_name}
       </p>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Accordion type="multiple" className="mt-5">
+        <Accordion type="multiple" className="my-10">
           {attributes.map((attribute, index) => (
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className="border-b border-gray-600/70 last:border-b-0"
+              className="mb-3 rounded border border-gray-600 bg-gray-600/30"
             >
-              <AccordionTrigger>{attribute.name}</AccordionTrigger>
+              <AccordionTrigger>
+                <p className="text-gray-100/90"> {attribute.name}</p>
+              </AccordionTrigger>
               <AccordionContent>
                 <Controller
                   name={`attributes.${attribute.name}`}
@@ -85,7 +87,7 @@ function ProductVariantForm({ product, isEditing, ProductAttributes }) {
                     <RadioGroup
                       value={field.value}
                       onValueChange={field.onChange}
-                      className="mt-3 flex flex-col gap-3"
+                      className="mt-3 flex flex-col gap-3 pl-2"
                     >
                       {attribute.values.map((item, index) => (
                         <div
@@ -117,53 +119,57 @@ function ProductVariantForm({ product, isEditing, ProductAttributes }) {
           ))}
         </Accordion>
 
-        {/* Rest of the form */}
-        <div className="flex gap-5 lg:items-center mt-5 w-full flex-col lg:flex-row">
-          <div className="lg:my-6">
-            <Label htmlFor="price">Price</Label>
+        {/* Price, Stock, and Status Section */}
+        <div className="mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div>
+            <Label htmlFor="price" className="text-base font-medium">
+              Price
+            </Label>
             <Input
               id="price"
               type="number"
               placeholder="Enter price"
-              {...register("price", {
-                required: "Price is required",
-              })}
-              className="my-2"
+              {...register("price", { required: "Price is required" })}
+              className="mt-2 border-gray-400"
             />
             {errors.price && (
-              <p className="text-sm text-red-500">{errors.price.message}</p>
+              <p className="mt-2 text-sm text-red-500">
+                {errors.price.message}
+              </p>
             )}
           </div>
 
-          <div className="lg:my-6">
-            <Label htmlFor="stock">Stock</Label>
+          <div>
+            <Label htmlFor="stock" className="text-base font-medium">
+              Stock
+            </Label>
             <Input
               id="stock"
               type="number"
-              placeholder="Enter Stock"
-              {...register("stock", {
-                required: "Stock is required",
-              })}
-              className="my-2"
+              placeholder="Enter stock"
+              {...register("stock", { required: "Stock is required" })}
+              className="mt-2 border-gray-400"
             />
             {errors.stock && (
-              <p className="text-sm text-red-500">{errors.stock.message}</p>
+              <p className="mt-2 text-sm text-red-500">
+                {errors.stock.message}
+              </p>
             )}
           </div>
 
-          <div className="flex flex-col lg:my-6">
-            <Label className="mb-2">Status</Label>
+          <div className="flex flex-col">
+            <Label className="mb-2 text-base font-medium">Status</Label>
             <Controller
               name="status"
               control={control}
               render={({ field }) => (
                 <Select2
                   list={[
-                    { id: "unavailable", name: "unavailable" },
-                    { id: "call", name: "call" },
+                    { id: "unavailable", name: "Unavailable" },
+                    { id: "call", name: "Call" },
                   ]}
                   label="Status"
-                  defaultItem={{ name: "available", value: "available" }}
+                  defaultItem={{ name: "Available", value: "available" }}
                   onChange={(value) => field.onChange(value)}
                   value={field.value}
                 />
@@ -172,13 +178,16 @@ function ProductVariantForm({ product, isEditing, ProductAttributes }) {
           </div>
         </div>
 
-        <Button
-          disabled={isPending || updatePending}
-          type="submit"
-          className="my-5 w-56 bg-gray-200 text-black hover:bg-gray-400"
-        >
-          Submit
-        </Button>
+        {/* Submit Button */}
+        <div className="text-center">
+          <Button
+            disabled={isPending || updatePending}
+            type="submit"
+            className="mt-12 mb-5 w-52 rounded-lg bg-violet-500 px-4 py-2 text-base text-white shadow-md hover:bg-violet-600"
+          >
+            Submit
+          </Button>
+        </div>
       </form>
     </Card>
   );

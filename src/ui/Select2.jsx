@@ -18,9 +18,19 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export function Select2({ list, label, defaultItem, onChange, value, disabled }) {
+export function Select2({
+  list,
+  label,
+  defaultItem,
+  onChange,
+  value,
+  disabled,
+  contentWidth,
+}) {
   const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState(value || defaultItem?.value);
+  const [selectedValue, setSelectedValue] = React.useState(
+    value || defaultItem?.value,
+  );
 
   const handleSelect = (selectedValue) => {
     if (selectedValue !== value) {
@@ -29,7 +39,7 @@ export function Select2({ list, label, defaultItem, onChange, value, disabled })
         onChange(selectedValue);
       }
     }
-    setOpen(false); 
+    setOpen(false);
   };
 
   return (
@@ -40,7 +50,7 @@ export function Select2({ list, label, defaultItem, onChange, value, disabled })
           role="combobox"
           disabled={disabled}
           aria-expanded={open}
-          className="w-[200px] justify-between border-gray-600 bg-transparent"
+          className={`${contentWidth} justify-between border-gray-600 bg-transparent`}
         >
           {selectedValue
             ? list.find((item) => item.id === selectedValue)?.name ||
@@ -49,7 +59,7 @@ export function Select2({ list, label, defaultItem, onChange, value, disabled })
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className={`${contentWidth} p-0`}>
         <Command>
           <CommandInput placeholder={`Search ${label}...`} />
           <CommandList>
@@ -64,7 +74,9 @@ export function Select2({ list, label, defaultItem, onChange, value, disabled })
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    selectedValue === defaultItem?.value ? "opacity-100" : "opacity-0"
+                    selectedValue === defaultItem?.value
+                      ? "opacity-100"
+                      : "opacity-0",
                   )}
                 />
                 {defaultItem?.name}
@@ -79,7 +91,7 @@ export function Select2({ list, label, defaultItem, onChange, value, disabled })
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      selectedValue === item.id ? "opacity-100" : "opacity-0"
+                      selectedValue === item.id ? "opacity-100" : "opacity-0",
                     )}
                   />
                   {item.name}
@@ -92,4 +104,3 @@ export function Select2({ list, label, defaultItem, onChange, value, disabled })
     </Popover>
   );
 }
-
