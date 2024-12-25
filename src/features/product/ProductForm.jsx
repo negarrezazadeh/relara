@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +11,7 @@ import useProducts from "./useProducts";
 import useCategoriesAll from "../category/useCategoriesAll";
 import Loader from "@/ui/Loader";
 import { MultiSelect } from "@/ui/MultiSelect";
+import MediaForm from "../media/MediaForm";
 
 function ProductForm({ product }) {
   const {
@@ -31,10 +33,11 @@ function ProductForm({ product }) {
   const { updateProduct, isPending: updatePending } = useProductUpdate();
   const { allCategories, isLoading } = useCategoriesAll();
   const { products } = useProducts();
+  const [images, setImages] = useState([]);
 
   if (isLoading) return <Loader />;
 
-  const onSubmit = (data) => {    
+  const onSubmit = (data) => {
     // Trimmed Name
     const trimmedName = data.name.trim();
 
@@ -44,13 +47,20 @@ function ProductForm({ product }) {
     } else {
       // Check for duplicate products
       const isDuplicate = products.some(
-        (pro) => pro.name.toLowerCase().trim() === trimmedName.toLowerCase()
+        (pro) => pro.name.toLowerCase().trim() === trimmedName.toLowerCase(),
       );
       if (isDuplicate) {
         setError("name", { message: "This Product Name is already in use." });
         return;
       }
-      addProduct(data);
+
+      const imagePaths = images.map((img, index) => ({
+        path: img.path,
+        is_primary: index === 0 ? true : false,
+      }));
+      const finalData = { ...data, images: imagePaths };
+
+      addProduct(finalData);
       reset();
     }
   };
@@ -92,8 +102,12 @@ function ProductForm({ product }) {
           />
         </div>
 
+        <div className="mt-8">
+          <MediaForm images={images} onUploaded={setImages} />
+        </div>
+
         {/* Description Field */}
-        <div className="mt-4">
+        <div className="mt-8">
           <Label htmlFor="description">Description</Label>
           <Textarea
             id="description"

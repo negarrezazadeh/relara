@@ -30,7 +30,7 @@ function ProductVariantForm({ product, isEditing, ProductAttributes }) {
           stock: product.stock || "",
           status: product.status || "available",
         }
-      : { status: "available" }, 
+      : { status: "available" },
   });
 
   const { attributes, isLoading } = useAttributes();
@@ -64,7 +64,7 @@ function ProductVariantForm({ product, isEditing, ProductAttributes }) {
 
   return (
     <Card>
-      <p className="border-l border-gray-600 pl-2 text-xl font-semibold text-violet-500">
+      <p className="border-l border-gray-600 pl-2 text-xl font-semibold text-violet-400">
         {product.name || product.product_name}
       </p>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -76,7 +76,7 @@ function ProductVariantForm({ product, isEditing, ProductAttributes }) {
               className="mb-3 rounded border border-gray-600 bg-gray-600/30"
             >
               <AccordionTrigger>
-                <p className="text-gray-100/90"> {attribute.name}</p>
+                <p className="text-sm text-gray-100/90"> {attribute.name}</p>
               </AccordionTrigger>
               <AccordionContent>
                 <Controller
@@ -183,7 +183,7 @@ function ProductVariantForm({ product, isEditing, ProductAttributes }) {
           <Button
             disabled={isPending || updatePending}
             type="submit"
-            className="mt-12 mb-5 w-52 rounded-lg bg-violet-500 px-4 py-2 text-base text-white shadow-md hover:bg-violet-600"
+            className="mb-5 mt-12 w-52 rounded-lg bg-violet-500 px-4 py-2 text-base text-white shadow-md hover:bg-violet-600"
           >
             Submit
           </Button>

@@ -11,7 +11,7 @@ import { BiMessageSquareDetail } from "react-icons/bi";
 import useDeleteProduct from "./useDeleteProduct";
 
 function ProductsItem({ product, productIndex }) {
-  const { deleteProduct, isPending, isIdle } = useDeleteProduct();
+  const { deleteProduct, isPending, isIdle } = useDeleteProduct();  
 
   const handleDelete = (id) => {
     if(product.variants.length > 0) return toast.error("Product has variants. You cannot delete this product")
@@ -23,6 +23,7 @@ function ProductsItem({ product, productIndex }) {
       className={`odd:bg-gray-700/50 even:bg-gray-700/70 ${!isIdle && "opacity-50"}`}
     >
       <TableCell>{productIndex}</TableCell>
+      <TableCell>{product.primary_image && <img src={product.primary_image.url} alt={product.name} className="w-10 h-10 object-cover rounded"/>}</TableCell>
       <TableCell className="text-violet-400"><Link to={`/product-variants/create/${product.id}`}>{product.name}</Link></TableCell>
       <TableCell>{product.variants.length}</TableCell>
       <TableCell className="text-right">

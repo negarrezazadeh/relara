@@ -23,7 +23,8 @@ function ProductsList() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]"></TableHead>
+              <TableHead className="w-[60px]"></TableHead>
+              <TableHead className="w-[100px] m-auto"></TableHead>
               <TableHead>Product Name</TableHead>
               <TableHead>Product Variants</TableHead>
               <TableHead className="pr-14 text-right">Actions</TableHead>
