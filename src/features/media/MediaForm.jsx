@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 import useUploadMedia from "./useUploadMedia";
 import { FaTrashAlt } from "react-icons/fa";
 
-function MediaForm({ onUploaded, images }) {
+function MediaForm({ onSetImage, images }) {
   const { uploadMedia, isPending } = useUploadMedia();
   const [featuredImage, setFeaturedImage] = useState();
 
@@ -13,15 +13,25 @@ function MediaForm({ onUploaded, images }) {
 
     uploadMedia(e.target.files[0], {
       onSuccess: (data) => {
-        onUploaded((prev) => {
+        onSetImage((prev) => {
           return [...prev, data];
         });
       },
     });
   };
 
-  const handleDelete = (index) => {
-    onUploaded((prev) => prev.filter((_, i) => i !== index));
+  const handleDelete = (indexImage) => {
+    onSetImage((prev) => prev.filter((_, i) => i !== indexImage));
+  };
+
+  const handleFeaturedImage = (indexImage) => {
+    const newImages = images.map((image, indexFeaturedImage) =>
+      indexFeaturedImage === indexImage
+        ? { ...image, is_primary: true }
+        : { ...image, is_primary: false },
+    );
+    setFeaturedImage(indexImage);
+    onSetImage(newImages);
   };
 
   return (
@@ -36,22 +46,22 @@ function MediaForm({ onUploaded, images }) {
       />
       {images.length > 0 && (
         <div className="flex space-x-4 rounded border border-dashed border-gray-400 p-4">
-          {images.map((img, index) => (
-            <div key={index} className="relative">
+          {images.map((img, indexImage) => (
+            <div key={indexImage} className="relative">
               <button
-                onClick={() => handleDelete(index)}
+                onClick={() => handleDelete(indexImage)}
                 className="text-md absolute left-[-5px] top-[-5px] text-red-500 transition duration-200 ease-in-out hover:text-red-300"
               >
                 <FaTrashAlt />
               </button>
               <img
-                onClick={() => setFeaturedImage(index)}
+                onClick={() => handleFeaturedImage(indexImage)}
                 src={img.url}
                 alt={img.name}
-                className={`h-28 w-28 cursor-pointer rounded border-2 object-cover ${
-                  featuredImage === index
-                    ? "border-violet-400"
-                    : "border-gray-600"
+                className={`h-28 w-28 cursor-pointer rounded object-cover ${
+                  featuredImage === indexImage || img.is_primary
+                    ? "ring ring-violet-500"
+                    : "border-2 border-gray-600"
                 }`}
               />
             </div>

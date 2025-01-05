@@ -33,7 +33,7 @@ function ProductForm({ product }) {
   const { updateProduct, isPending: updatePending } = useProductUpdate();
   const { allCategories, isLoading } = useCategoriesAll();
   const { products } = useProducts();
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState(product?.images || []);
 
   if (isLoading) return <Loader />;
 
@@ -41,29 +41,33 @@ function ProductForm({ product }) {
     // Trimmed Name
     const trimmedName = data.name.trim();
 
+    // Check for primary image
+    const hasPrimary = images.find((img) => img.is_primary);
+    if (!hasPrimary) {
+      images[0].is_primary = true;
+    }
+    
+    const finalData = { ...data, images: images };    
+
     // Call add or update function
     if (product) {
-      updateProduct({ data, id: product.id });
-    } else {
-      // Check for duplicate products
-      const isDuplicate = products.some(
-        (pro) => pro.name.toLowerCase().trim() === trimmedName.toLowerCase(),
-      );
-      if (isDuplicate) {
-        setError("name", { message: "This Product Name is already in use." });
-        return;
-      }
-
-      const imagePaths = images.map((img, index) => ({
-        path: img.path,
-        is_primary: index === 0 ? true : false,
-      }));
-      const finalData = { ...data, images: imagePaths };
-
-      addProduct(finalData);
-      reset();
+      updateProduct({ data: finalData, id: product.id });
+      return;
     }
+    // Check for duplicate products
+    const isDuplicate = products.some(
+      (pro) => pro.name.toLowerCase().trim() === trimmedName.toLowerCase(),
+    );
+    if (isDuplicate) {
+      setError("name", { message: "This Product Name is already in use." });
+      return;
+    }
+
+    addProduct(finalData);
+    reset();
   };
+
+  
 
   return (
     <Card>
@@ -93,7 +97,7 @@ function ProductForm({ product }) {
             control={control}
             render={({ field }) => (
               <MultiSelect
-                list={[{ id: 0, name: "No Category" }, ...allCategories]}
+                list={allCategories}
                 label="Category"
                 defaultItems={field.value}
                 onChange={(value) => field.onChange(value)}
@@ -103,7 +107,7 @@ function ProductForm({ product }) {
         </div>
 
         <div className="mt-8">
-          <MediaForm images={images} onUploaded={setImages} />
+          <MediaForm images={images} onSetImage={setImages} />
         </div>
 
         {/* Description Field */}
