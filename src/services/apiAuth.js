@@ -16,9 +16,17 @@ export const getUserById = async (id) => {
   return response.data;
 };
 
-export const getUsers = async () => {
-  const response = await httpPrivate.get("/api/v1/users");
-  return response.data;
+export const getUsers = async (page) => {
+  const response = await httpPrivate.get(`/api/v1/users?page=${page}`);
+  const { data, current_page, last_page, next_page_url, prev_page_url } =
+    response.data;
+  return {
+    users: data,
+    currentPage: current_page,
+    lastPage: last_page,
+    nextPageUrl: next_page_url,
+    prevPageUrl: prev_page_url,
+  };
 };
 
 export const createOrUpdateUser = async ({ data, id }) => {

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import useUsers from "./useUsers";
 import UserItem from "./UserItem";
 import {
@@ -11,7 +12,9 @@ import Card from "@/ui/Card";
 import Loader from "@/ui/Loader";
 
 function UsersList() {
-  const { isLoading, users } = useUsers();
+  const [page, setPage] = useState(1);
+  const { isLoading, users, currentPage, lastPage, isPlaceholderData } =
+    useUsers(page);
 
   if (isLoading) return <Loader />;
 
@@ -28,11 +31,39 @@ function UsersList() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {users.data.map((user, index) => (
-            <UserItem key={user.id} user={user} userIndex={index + 1} />
+          {users.users.map((user, index) => (
+            <UserItem
+              key={user.id}
+              user={user}
+              userIndex={(currentPage - 1) * 2 + index + 1}
+            />
           ))}
         </TableBody>
       </Table>
+
+      {/* pagination */}
+      <div className="mt-4 flex items-center justify-end">
+        <button
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          className={`text-md ${currentPage === 1 ? "text-gray-500" : "text-violet-500"}`}
+        >
+          Previous
+        </button>
+        <span className="mx-4">|</span>
+        <span>
+          Page {currentPage} of {lastPage}
+        </span>
+        <span className="mx-4">|</span>
+
+        <button
+          onClick={() => setPage((prev) => Math.min(prev + 1, lastPage))}
+          disabled={currentPage === lastPage || isPlaceholderData}
+          className={`text-md ${currentPage === lastPage || isPlaceholderData ? "text-gray-400" : "text-violet-500"}`}
+        >
+          Next
+        </button>
+      </div>
     </Card>
   );
 }

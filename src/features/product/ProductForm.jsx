@@ -43,7 +43,7 @@ function ProductForm({ product }) {
 
     // Check for primary image
     const hasPrimary = images.find((img) => img.is_primary);
-    if (!hasPrimary) {
+    if (!hasPrimary && images.length > 0) {
       images[0].is_primary = true;
     }
     
