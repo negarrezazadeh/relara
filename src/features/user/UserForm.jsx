@@ -49,7 +49,7 @@ function UserForm({ user }) {
         </div>
 
         <div>
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">Email *</Label>
           <Input
             className="mt-2"
             placeholder="Email"
@@ -88,7 +88,7 @@ function UserForm({ user }) {
         </div>
 
         <div>
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password">Password *</Label>
           <Input
             className="mt-2"
             type="password"
@@ -104,7 +104,7 @@ function UserForm({ user }) {
         </div>
 
         <div>
-          <Label>Role</Label>
+          <Label>Role *</Label>
           <Controller
             name="role"
             control={control}
