@@ -10,9 +10,11 @@ import {
 } from "@/components/ui/table";
 import Card from "@/ui/Card";
 import Loader from "@/ui/Loader";
+import PageController from "@/ui/PageController";
 
 function UsersList() {
   const [page, setPage] = useState(1);
+
   const { isLoading, users, currentPage, lastPage, isPlaceholderData } =
     useUsers(page);
 
@@ -42,28 +44,8 @@ function UsersList() {
       </Table>
 
       {/* pagination */}
-      <div className="mt-4 flex items-center justify-end">
-        <button
-          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-          className={`text-sm font-medium ${currentPage === 1 ? "text-gray-500" : "text-violet-500"}`}
-        >
-          Previous
-        </button>
-        <span className="mx-4 text-gray-600">|</span>
-        <span className="text-sm font-medium text-gray-300">
-          Page {currentPage} of {lastPage}
-        </span>
-        <span className="mx-4 text-gray-600">|</span>
+      <PageController isPlaceholderData={isPlaceholderData} currentPage={page} lastPage={lastPage} onPageChange={setPage}/>
 
-        <button
-          onClick={() => setPage((prev) => Math.min(prev + 1, lastPage))}
-          disabled={currentPage === lastPage || isPlaceholderData}
-          className={`text-sm font-medium ${currentPage === lastPage || isPlaceholderData ? "text-gray-500" : "text-violet-500"}`}
-        >
-          Next
-        </button>
-      </div>
     </Card>
   );
 }
