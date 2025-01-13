@@ -8,7 +8,7 @@ function SidebarLink({ icon, title, link }) {
   return (
     <NavLink
       to={link}
-      className="flex cursor-pointer items-center gap-x-2 px-5 py-4"
+      className="flex cursor-pointer items-center gap-x-2 p-3 mt-2"
     >
       {sidebarIcon}
       <span className="text-gray-200">{title}</span>

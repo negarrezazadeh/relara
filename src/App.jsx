@@ -25,6 +25,9 @@ import EditProductPage from "./pages/products/EditProductPage";
 import AddProductVariantPage from "./pages/products/productVariant/AddProductVariantPage";
 import EditProductVariantPage from "./pages/products/productVariant/EditProductVariantPage";
 import ProductVariantsPage from "./pages/products/productVariant/ProductVariantPage";
+import DiscountCodesPage from "./pages/discount_codes/DiscountCodesPage";
+import EditDiscountCodePage from "./pages/discount_codes/EditDiscountCodePage";
+import AddDiscountCodePage from "./pages/discount_codes/AddDiscountCodePage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,7 +41,7 @@ function App() {
   return (
     <BrowserRouter future={{ v7_relativeSplatPath: true }}>
       <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
+        <ReactQueryDevtools initialIsOpen={false} />
         <AuthContextProvider>
           <Toaster position="top-center" reverseOrder={false} />
           <Routes>
@@ -85,13 +88,24 @@ function App() {
                 path="/product-variants/create/:id"
                 element={<AddProductVariantPage />}
               />
-               <Route
+              <Route
                 path="/product-variants/:id"
                 element={<ProductVariantsPage />}
               />
-               <Route
+              <Route
                 path="/product-variants/edit/:id"
                 element={<EditProductVariantPage />}
+              />
+              
+              {/* discount code pages */}
+              <Route path="/discount-codes" element={<DiscountCodesPage />} />
+              <Route
+                path="/discount-codes/:id"
+                element={<EditDiscountCodePage />}
+              />
+              <Route
+                path="/discount-codes/create"
+                element={<AddDiscountCodePage />}
               />
             </Route>
           </Routes>

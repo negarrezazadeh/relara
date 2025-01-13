@@ -3,6 +3,7 @@ import { BiSolidCategoryAlt } from "react-icons/bi";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 import { MdAccountTree } from "react-icons/md";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
+import { RiDiscountPercentFill } from "react-icons/ri";
 
 import { Input } from "@/components/ui/input";
 import SidebarAccordion from "@/ui/SidebarAccordion";
@@ -28,7 +29,12 @@ function SideBar({ isSidebarOpen }) {
     { label: "Products List", href: "/products" },
     { label: "Add Product", href: "/products/create" },
   ];
-  
+
+  const discountCodeLinks = [
+    { label: "Discount Code List", href: "/discount-codes" },
+    { label: "Add Discount Code", href: "/discount-codes/create" },
+  ];
+
   return (
     <div
       className={`fixed bottom-0 left-0 top-[71px] z-50 w-60 border-r border-gray-600 bg-dark-800 lg:top-[77px] lg:block ${isSidebarOpen ? "block" : "hidden"}`}
@@ -57,9 +63,14 @@ function SideBar({ isSidebarOpen }) {
         links={attributeLinks}
       />
       <SidebarAccordion
-        icon={<MdOutlineProductionQuantityLimits />        }
+        icon={<MdOutlineProductionQuantityLimits />}
         title="Product"
         links={productLinks}
+      />
+      <SidebarAccordion
+        icon={<RiDiscountPercentFill />}
+        title="Discount Code"
+        links={discountCodeLinks}
       />
     </div>
   );
