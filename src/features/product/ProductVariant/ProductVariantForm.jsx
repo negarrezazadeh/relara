@@ -41,7 +41,7 @@ function ProductVariantForm({ product, isEditing, ProductAttributes }) {
   if (isLoading) return <Loader />;
 
   // Pass selected attribute ID
-  const onSubmit = async (data) => {
+  const onSubmit = async (data) => {    
     const attributeValues = Object.values(data.attributes || {}).map(
       (id) => id,
     );

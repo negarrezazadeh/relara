@@ -12,12 +12,12 @@ export const getUser = async () => {
 };
 
 export const getUserById = async (id) => {
-  const response = await httpPrivate.get(`/api/v1/users/${id}`);
+  const response = await httpPrivate.get(`/api/v1/admin/users/${id}`);
   return response.data;
 };
 
 export const getUsers = async (page) => {
-  const response = await httpPrivate.get(`/api/v1/users?page=${page}`);
+  const response = await httpPrivate.get(`/api/v1/admin/users?page=${page}`);
   const { data, current_page, last_page, next_page_url, prev_page_url } =
     response.data;
   return {
@@ -31,15 +31,15 @@ export const getUsers = async (page) => {
 
 export const createOrUpdateUser = async ({ data, id }) => {
   if (!id) {
-    const response = await httpPrivate.post("/api/v1/users", data);
+    const response = await httpPrivate.post("/api/v1/admin/users", data);
     return response.data;
   } else {
-    const response = await httpPrivate.put(`/api/v1/users/${id}`, data);
+    const response = await httpPrivate.put(`/api/v1/admin/users/${id}`, data);
     return response.data;
   }
 };
 
 export const deleteUser = async (id) => {
-  const response = await httpPrivate.delete(`/api/v1/users/${id}`);
+  const response = await httpPrivate.delete(`/api/v1/admin/users/${id}`);
   return response.data;
 };

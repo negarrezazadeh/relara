@@ -45,11 +45,11 @@ function DiscountCodeList() {
       ) : (
         <div className="my-2 flex flex-col items-center">
           <p className="text-center font-semibold text-violet-400">
-            No products found. Do you want to add one?
+            No discount code found. Do you want to add one?
           </p>
-          <Link to={`/products/create`}>
+          <Link to={`/discount-codes/create`}>
             <Button className="mx-auto mt-5 bg-gray-200 text-black hover:bg-gray-700 hover:text-white">
-              Add Product
+              Add discount code
             </Button>
           </Link>
         </div>

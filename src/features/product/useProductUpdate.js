@@ -19,7 +19,6 @@ export default function useProductUpdate() {
         error?.response?.data?.message || "An unexpected error occurred";
       toast.error(errorMessage);
     },
-
   });
 
   return { updateProduct, isPending };
