@@ -12,7 +12,7 @@ function Header({ isSidebarOpen, setIsSidebarOpen }) {
     <header className="fixed left-0 top-0 z-50 w-full">
       <div className="flex justify-between border-b border-gray-600 bg-dark-800 px-5 py-5 lg:px-10">
         <div className="hidden text-2xl font-extrabold text-white lg:block">
-          Relara LOGO
+          Relara
         </div>
         <div className="hidden w-96 lg:block">
           <Input type="text" placeholder="Search" />

@@ -28,14 +28,17 @@ function CategoryForm({ category }) {
   const { addCategory, isPending } = useAddCategory();
   const { updateCategory, isPending: updatePending } = useUpdateCategory();
   const { allCategories, isLoading } = useCategoriesAll();
-
+  
   if (isLoading) return <Loader />;
 
   const onSubmit = (data) => {
     // Check for duplicate categories
     const isDuplicate = allCategories.some(
-      (cat) => cat.name.toLowerCase() === data.name.toLowerCase(),
+      (cat) =>
+        cat.name.toLowerCase() === data.name.toLowerCase() &&
+        cat.id !== category?.id,
     );
+
     if (isDuplicate) {
       setError("name", { message: "This Category is already in use." });
       return;
