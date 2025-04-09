@@ -9,8 +9,13 @@ import useUpdateCategory from "./useUpdateCategory";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useSearchParams } from "react-router-dom";
 
 function CategoryForm({ category }) {
+  const [searchParams] = useSearchParams();
+  const subCatId = Number(searchParams.get("category"));
+
+  
   const {
     register,
     handleSubmit,
@@ -21,10 +26,11 @@ function CategoryForm({ category }) {
   } = useForm({
     defaultValues: {
       name: category?.name || "",
-      category: category?.parent_id || 0,
+      category: subCatId || category?.parent_id || 0,
     },
   });
-
+  
+  
   const { addCategory, isPending } = useAddCategory();
   const { updateCategory, isPending: updatePending } = useUpdateCategory();
   const { allCategories, isLoading } = useCategoriesAll();

@@ -9,6 +9,7 @@ import useDeleteCategory from "./useDeleteCategory";
 import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { Button } from "@/components/ui/button";
+import { IoMdAddCircleOutline } from "react-icons/io";
 
 function UlListCat({ categories }) {
   const { deleteCategory, isPending } = useDeleteCategory();
@@ -41,6 +42,13 @@ function UlListCat({ categories }) {
             </div>
 
             <div className="flex items-center gap-3">
+              {/* add button */}
+              <Link
+                to={`/categories/create?category=${category.id}`}
+                className="rounded p-1 text-sm transition hover:text-violet-500"
+              >
+                <IoMdAddCircleOutline />
+              </Link>
               {/* delete button */}
               <AlertDelete
                 onDelete={() => handleDelete(category)}
@@ -86,7 +94,7 @@ function CategoriesList() {
       {categories.length > 0 ? (
         <UlListCat categories={categories} />
       ) : (
-        <div className="flex flex-col items-center my-2">
+        <div className="my-2 flex flex-col items-center">
           <p className="text-center font-semibold text-violet-400">
             No categories found. Do you want to add one?
           </p>

@@ -63,6 +63,7 @@ function App() {
               <Route path="/categories" element={<CategoriesPage />} />
               <Route path="/categories/:id" element={<EditCategoryPage />} />
               <Route path="/categories/create" element={<AddCategoryPage />} />
+              {/* <Route path="/categories/create/:id" element={<AddCategoryPage />} /> */}
 
               {/* attribute pages */}
               <Route path="/attributes" element={<AttributesPage />} />
