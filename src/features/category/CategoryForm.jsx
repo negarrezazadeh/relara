@@ -97,7 +97,7 @@ function CategoryForm({ category }) {
                 defaultItem={{ name: "Main Category", value: 0 }}
                 onChange={(value) => field.onChange(value)}
                 value={field.value}
-                disabled={category?.children?.length > 0}
+                disabled={category?.children?.length > 0 || subCatId}
                 contentWidth="w-[200px]"
               />
             )}
