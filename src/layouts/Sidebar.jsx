@@ -37,7 +37,7 @@ function SideBar({ isSidebarOpen }) {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 top-[71px] z-50 w-60 border-r border-gray-600 bg-dark-800 lg:top-[77px] lg:block ${isSidebarOpen ? "block" : "hidden"}`}
+      className={`fixed bottom-0 left-0 top-[71px] z-50 w-60 overflow-y-auto border-r border-gray-600 bg-dark-800 lg:top-[77px] lg:block ${isSidebarOpen ? "block" : "hidden"}`}
     >
       <div className="m-auto block w-60 px-5 py-4 lg:hidden">
         <Input type="text" placeholder="Search" />
